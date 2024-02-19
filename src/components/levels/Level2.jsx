@@ -9,6 +9,7 @@ const Level2 = ({ onComplete }) => {
     const [inputValue, setInputValue] = useState("");
     const [image, setImage] = useState("/birdincage.png");
     const [initialRender, setInitialRender] = useState(true);
+    const [text, setText] = useState("Release the bird");
 
     // Set the theme to a specific color when the component mounts
     useEffect(() => {
@@ -19,6 +20,7 @@ const Level2 = ({ onComplete }) => {
     useEffect(() => {
         if (!initialRender && theme === "light") {
             setImage("/bird.png");
+            setText("Bird is free!");
             setTimeout(() => {
                 onComplete(3);
             }, 2000);
@@ -51,9 +53,7 @@ const Level2 = ({ onComplete }) => {
             <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
                 Level 2
             </h1>
-            <p className=" mt-8 text-xl font-semibold mb-[-1rem]">
-                Release the bird
-            </p>
+            <p className=" mt-8 text-xl font-semibold mb-[-1rem]">{text}</p>
             <Image
                 className="my-5 "
                 src={image}
