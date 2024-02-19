@@ -3,14 +3,16 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "../ui/input";
+import { useTheme } from "next-themes";
 
 const Level1 = ({ onComplete }) => {
     const [rotationAngle, setRotationAngle] = useState(0);
     const [inputValue, setInputValue] = useState("");
+    const { setTheme } = useTheme();
 
     useEffect(() => {
         if (rotationAngle === 180) {
-            onComplete();
+            onComplete(2);
         }
     }, [rotationAngle, onComplete]);
     const handleInputChange = (e) => {
@@ -19,6 +21,7 @@ const Level1 = ({ onComplete }) => {
 
     const handleCommandSubmit = () => {
         const match = inputValue.match(/^\/rotate (\d+)$/);
+        const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
 
         if (match) {
             const angle = parseInt(match[1], 10);
@@ -26,12 +29,16 @@ const Level1 = ({ onComplete }) => {
                 setRotationAngle((prevAngle) => (prevAngle + angle) % 360);
                 setInputValue("");
             }
+        } else if (matchTheme) {
+            const theme = matchTheme[1];
+            setTheme(theme);
+            setInputValue("");
         }
     };
 
     return (
-        <div className=" flex flex-col items-center mt-4">
-            <h1 className="text-2xl text-purple-600 px-4 py-2 rounded-full bg-yellow-300">
+        <div className="flex flex-col items-center mt-4 ">
+            <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
                 Level 1
             </h1>
             <p className=" mt-8 text-xl font-semibold mb-[-1rem]">
@@ -57,7 +64,7 @@ const Level1 = ({ onComplete }) => {
                         alt="Run"
                         height={35}
                         width={35}
-                        className=" bg-blue-600 rounded-sm p-1"
+                        className="p-1 bg-blue-600 rounded-sm "
                     />
                 </button>
             </div>

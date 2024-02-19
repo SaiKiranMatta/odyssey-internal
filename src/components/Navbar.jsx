@@ -1,16 +1,16 @@
 import React from "react";
 import Link from "next/link";
-import { ModeToggle } from "./ModeToggle";
+// import { ModeToggle } from "./ModeToggle";
 
 const Navbar = () => {
     return (
-        <div className=" flex w-screen border-t-2 border-purple-600 h-16 bg-purple-600 items-center px-3 justify-between">
+        <div className="flex items-center justify-between w-screen h-16 px-3 bg-purple-600 border-t-2 border-purple-600 ">
             <Link href="/">
-                <span className="md:text-3xl text-2xl font-semibold text-yellow-300">
+                <span className="text-2xl font-semibold text-yellow-300 md:text-3xl">
                     Odyssey
                 </span>
             </Link>
-            <ModeToggle />
+            {/* <ModeToggle /> */}
         </div>
     );
 };
