@@ -7,7 +7,7 @@ import Level4 from "@/components/levels/Level4";
 import React, { useEffect, useState } from "react";
 
 const Game = () => {
-    const [currentLevel, setCurrentLevel] = useState(3);
+    const [currentLevel, setCurrentLevel] = useState(4);
 
     const handleLevelComplete = (curLevel) => {
         console.log("function called");
