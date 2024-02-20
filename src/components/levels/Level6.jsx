@@ -6,23 +6,23 @@ import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
 import { useToast } from "@/components/ui/use-toast";
 
-const Level5 = ({ onComplete }) => {
+const Level6 = ({ onComplete }) => {
     const [rotationAngle, setRotationAngle] = useState(0);
     const [inputValue, setInputValue] = useState("");
     const { setTheme } = useTheme();
     const { toast } = useToast();
     const [text, setText] = useState(
-        "What path holds the key, with points numbered, can you see? Follow the route, unveil the sign, and reveal the tech giant, so divine."
+        "find what this signifies?."
     );
     const [atext, setAtext] = useState("");
 
     const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
     useEffect(() => {
-        if (atext === "google") {
+        if (atext === "opensys") {
             setText("Success!");
             setTimeout(() => {
-                onComplete(6);
+                onComplete(7);
             }, 2000);
         }
     }, [atext, onComplete]);
@@ -142,4 +142,4 @@ const Level5 = ({ onComplete }) => {
     );
 };
 
-export default Level5;
+export default Level6;
