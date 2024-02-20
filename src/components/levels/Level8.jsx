@@ -6,23 +6,20 @@ import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
 import { useToast } from "@/components/ui/use-toast";
 
-const Level6 = ({ onComplete }) => {
-    const [rotationAngle, setRotationAngle] = useState(0);
+const Level8 = ({ onComplete }) => {
     const [inputValue, setInputValue] = useState("");
     const { setTheme } = useTheme();
     const { toast } = useToast();
-    const [text, setText] = useState(
-        "find what this signifies?."
-    );
+    const [text, setText] = useState("Decode the morse code: -. . ...- . .-. / --. --- -. -. .- / --. .. ...- . / -.-- --- ..- / ..- .--.");
     const [atext, setAtext] = useState("");
 
     const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
     useEffect(() => {
-        if (atext === "opensys") {
+        if (atext === "never gonna give you up") {
             setText("Success!");
             setTimeout(() => {
-                onComplete(7);
+                onComplete(9);
             }, 2000);
         }
     }, [atext, onComplete]);
@@ -34,7 +31,7 @@ const Level6 = ({ onComplete }) => {
     const handleCommandSubmit = () => {
         const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
 
-        const match = inputValue.match(/^\/(text|help|rotate)\s*(.*)$/);
+        const match = inputValue.match(/^\/(text|help)\s*(.*)$/);
         console.log(match);
 
         if (match) {
@@ -42,13 +39,6 @@ const Level6 = ({ onComplete }) => {
             console.log(match);
 
             switch (command) {
-                case "rotate":
-                    if (!isNaN(text)) {
-                        setRotationAngle(
-                            (prevAngle) => (prevAngle + parseInt(text)) % 360
-                        );
-                        setInputValue("");
-                    }
                 case "text":
                     console.log(1);
                     setAtext(text.toLowerCase());
@@ -74,18 +64,10 @@ const Level6 = ({ onComplete }) => {
     return (
         <div className="flex flex-col items-center mt-4 ">
             <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
-                Level 6
+                Level 8
             </h1>
-            <p className="mx-10 mt-8 text-xl font-semibold ">{text}</p>
-            <div className=" w-[80%] ">
-                <Image
-                    src="/Hiddenlogo.jpg"
-                    alt="69"
-                    width={500}
-                    height={500}
-                    style={{ transform: `rotate(${rotationAngle}deg)` }}
-                />
-            </div>
+            <p className="mt-8 text-xl font-semibold ">{text}</p>
+
             <span
                 className="mx-10 mt-4 mb-8 cursor-pointer "
                 onClick={() => setHelpModalOpen(true)}
@@ -118,7 +100,6 @@ const Level6 = ({ onComplete }) => {
                             Available Commands:
                         </h2>
                         <ul>
-                            <li>/rotate [number]</li>
                             <li>/text [text]</li>
                             <li>/help</li>
                             <li>/theme [dark|light]</li>
@@ -126,7 +107,7 @@ const Level6 = ({ onComplete }) => {
                         <h2 className="flex flex-col my-2 text-xl font-bold">
                             Hint:
                         </h2>
-                        <p>Internet giant's address</p>
+                        <p>POTUS</p>
                         <div className="text-center ">
                             <button
                                 className="p-2 mt-4 text-white bg-blue-500 rounded-md "
@@ -142,4 +123,4 @@ const Level6 = ({ onComplete }) => {
     );
 };
 
-export default Level6;
+export default Level8;
