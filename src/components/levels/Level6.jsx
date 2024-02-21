@@ -79,10 +79,10 @@ const Level6 = ({ onComplete }) => {
             <p className="mx-10 mt-8 text-xl font-semibold ">{text}</p>
             <div className=" w-[80%] ">
                 <Image
-                    src="/Hiddenlogo.jpg"
+                    src="/odyssey1.png"
                     alt="69"
-                    width={500}
-                    height={500}
+                    width={150}
+                    height={150}
                     style={{ transform: `rotate(${rotationAngle}deg)` }}
                 />
             </div>
