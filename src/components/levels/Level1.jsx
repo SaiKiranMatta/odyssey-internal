@@ -56,6 +56,7 @@ const Level1 = ({ onComplete }) => {
                     type="text"
                     value={inputValue}
                     onChange={handleInputChange}
+                    onSubmit={handleCommandSubmit}
                     placeholder="Enter command..."
                 />
                 <button onSubmit={handleCommandSubmit}>
