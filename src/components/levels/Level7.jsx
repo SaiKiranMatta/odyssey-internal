@@ -13,6 +13,8 @@ const Level7 = ({ onComplete }) => {
     const { toast } = useToast();
     const [text, setText] = useState("Solve the equations");
     const [atext, setAtext] = useState("");
+    const [isanimatingleft, setisanimatingleft] = useState(true);
+    const [isanimatingright, setisanimatingright] = useState(true);
 
     const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
@@ -76,7 +78,11 @@ const Level7 = ({ onComplete }) => {
             </h1>
             <p className="mx-10 mt-8 text-xl font-semibold ">{text}</p>
             <div className="flex justify-between w-64 h-64 px-4 py-4 mt-4 text-xl border">
-                <div className="flex flex-col w-16 h-56 text-center border bg-[url('/leftcol.png')] bg-cover">
+                <div
+                    className={`flex flex-col w-16 h-56 text-center border bg-[url('/leftcol.png')] bg-cover bg-repeat-y ${
+                        isanimatingleft ? "spin-left" : ""
+                    }`}
+                >
                     <ul>
                         {/* <li className="py-2 border-b "> 4 </li>
                         <li className="py-2 border-b "> 9 </li>
@@ -85,14 +91,24 @@ const Level7 = ({ onComplete }) => {
                         <li className="py-2 border-b "> 3 </li> */}
                     </ul>
                 </div>
-                <div className="flex flex-col w-16 h-56 border">
+                <div className="flex flex-col w-16 h-56 text-black bg-white border">
                     <ul>
-                        <li className="py-2 border-b ">+ 5 =</li>
-                        <li className="py-2 border-b ">- 1 =</li>
-                        <li className="py-2 border-b ">* _ =</li>
+                        <li className="py-2 border-b  border-[#e5e7eb]">
+                            + 5 =
+                        </li>
+                        <li className="py-2 border-b border-[#e5e7eb]">
+                            - 1 =
+                        </li>
+                        <li className="py-2 border-b border-[#e5e7eb]">
+                            * _ =
+                        </li>
                     </ul>
                 </div>
-                <div className="flex flex-col w-16 h-56 text-center border bg-[url('/rightcol.png')] bg-cover">
+                <div
+                    className={`flex flex-col w-16 h-56 text-center border bg-[url('/rightcol.png')] bg-cover bg-repeat-y ${
+                        isanimatingright ? "spin-right" : ""
+                    }`}
+                >
                     <ul>
                         {/* <li className="py-2 border-b ">9</li>
                         <li className="py-2 border-b ">1</li>
