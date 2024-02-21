@@ -221,15 +221,13 @@ const Level7 = ({ onComplete }) => {
                             Available Commands:
                         </h2>
                         <ul>
-                            <li>/rotate [number]</li>
+                            <li>/start [left|right]</li>
+                            <li>/stop [left|right]</li>
                             <li>/text [text]</li>
                             <li>/help</li>
                             <li>/theme [dark|light]</li>
                         </ul>
-                        <h2 className="flex flex-col my-2 text-xl font-bold">
-                            Hint:
-                        </h2>
-                        <p>Internet giant's address</p>
+
                         <div className="text-center ">
                             <button
                                 className="p-2 mt-4 text-white bg-blue-500 rounded-md "
