@@ -110,7 +110,7 @@
 }
 
 .spin-right {
-    animation: spinRight 1.7s linear infinite; /* Adjust the duration and timing function as needed */
+    animation: spinRight 1.9s linear infinite; /* Adjust the duration and timing function as needed */
 }
 
 @keyframes spinLeft {
