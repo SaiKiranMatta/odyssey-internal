@@ -65,7 +65,7 @@ const Level1 = ({ onComplete }) => {
                     onKeyPress={handleEnter}
                     placeholder="Enter command..."
                 />
-                <button onSubmit={handleCommandSubmit}>
+                <button onClick={handleCommandSubmit}>
                     <Image
                         src="/runcode.png"
                         alt="Run"
