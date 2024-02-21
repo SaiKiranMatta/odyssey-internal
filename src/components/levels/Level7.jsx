@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
@@ -15,17 +15,67 @@ const Level7 = ({ onComplete }) => {
     const [atext, setAtext] = useState("");
     const [isanimatingleft, setisanimatingleft] = useState(true);
     const [isanimatingright, setisanimatingright] = useState(true);
+    const leftRef = useRef();
+    const rightRef = useRef();
 
     const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
+    const isInRange = (position, side, elementRef) => {
+        const [x, y] = position.split(" ").map((value) => parseFloat(value));
+
+        // Convert x and y values from pixels to rems
+        const baseFontSize = parseFloat(
+            getComputedStyle(document.documentElement).fontSize
+        );
+        const xRem = x / baseFontSize;
+        const yRem = y / baseFontSize;
+
+        console.log(side, `${xRem}rem ${yRem}rem`);
+
+        return xRem >= 0 && xRem <= 1 && yRem >= -1.3 && yRem <= 1.3;
+    };
+
     useEffect(() => {
-        if (atext === "opensys") {
+        const leftPosition = window.getComputedStyle(
+            leftRef.current
+        ).backgroundPosition;
+        const rightPosition = window.getComputedStyle(
+            rightRef.current
+        ).backgroundPosition;
+
+        if (
+            isInRange(leftPosition, "left") &&
+            isInRange(rightPosition, "right") &&
+            atext == "2"
+        ) {
             setText("Success!");
             setTimeout(() => {
-                onComplete(7);
+                onComplete(8);
             }, 2000);
         }
-    }, [atext, onComplete]);
+    }, [atext, leftRef, rightRef, onComplete]);
+
+    const stopAnimation = (side) => {
+        let currentPos;
+        if (side === "left") {
+            currentPos = window.getComputedStyle(
+                leftRef.current
+            ).backgroundPosition;
+            setisanimatingleft(false);
+        } else if (side === "right") {
+            currentPos = window.getComputedStyle(
+                rightRef.current
+            ).backgroundPosition;
+            setisanimatingright(false);
+        }
+
+        // Set the current background position as the final position
+        if (side === "left") {
+            leftRef.current.style.backgroundPosition = currentPos;
+        } else if (side === "right") {
+            rightRef.current.style.backgroundPosition = currentPos;
+        }
+    };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -35,11 +85,9 @@ const Level7 = ({ onComplete }) => {
         const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
 
         const match = inputValue.match(/^\/(text|help|rotate)\s*(.*)$/);
-        console.log(match);
 
         if (match) {
             const [, command, text] = match;
-            console.log(match);
 
             switch (command) {
                 case "rotate":
@@ -50,7 +98,6 @@ const Level7 = ({ onComplete }) => {
                         setInputValue("");
                     }
                 case "text":
-                    console.log(1);
                     setAtext(text.toLowerCase());
 
                     break;
@@ -63,6 +110,28 @@ const Level7 = ({ onComplete }) => {
         } else if (matchTheme) {
             const theme = matchTheme[1];
             setTheme(theme);
+            setInputValue("");
+        }
+
+        const stopLeftMatch = inputValue.match(/^\/stop left$/);
+        const stopRightMatch = inputValue.match(/^\/stop right$/);
+
+        if (stopLeftMatch) {
+            stopAnimation("left");
+            setInputValue("");
+        } else if (stopRightMatch) {
+            stopAnimation("right");
+            setInputValue("");
+        }
+
+        const startLeftMatch = inputValue.match(/^\/start left$/);
+        const startRightMatch = inputValue.match(/^\/start right$/);
+
+        if (startLeftMatch) {
+            setisanimatingleft(true);
+            setInputValue("");
+        } else if (startRightMatch) {
+            setisanimatingright(true);
             setInputValue("");
         }
     };
@@ -79,16 +148,17 @@ const Level7 = ({ onComplete }) => {
             <p className="mx-10 mt-8 text-xl font-semibold ">{text}</p>
             <div className="flex justify-between w-64 h-64 px-4 py-4 mt-4 text-xl border">
                 <div
-                    className={`flex flex-col w-16 h-56 text-center border bg-[url('/leftcol.png')] bg-cover bg-repeat-y ${
+                    ref={leftRef}
+                    className={`flex flex-col w-16 h-56 text-center border bg-[url('/leftcol.png')]                 bg-cover bg-repeat-y ${
                         isanimatingleft ? "spin-left" : ""
                     }`}
                 >
                     <ul>
-                        {/* <li className="py-2 border-b "> 4 </li>
+                        {/* <li className="py-2 border-b "> 2 </li>
                         <li className="py-2 border-b "> 9 </li>
-                        <li className="py-2 border-b "> 2 </li>
-                        <li className="py-2 border-b "> 9 </li>
-                        <li className="py-2 border-b "> 3 </li> */}
+                        <li className="py-2 border-b "> 3 </li>
+                        <li className="py-2 border-b "> 4 </li>
+                        <li className="py-2 border-b "> 9 </li> */}
                     </ul>
                 </div>
                 <div className="flex flex-col w-16 h-56 text-black bg-white border">
@@ -105,17 +175,18 @@ const Level7 = ({ onComplete }) => {
                     </ul>
                 </div>
                 <div
+                    ref={rightRef}
                     className={`flex flex-col w-16 h-56 text-center border bg-[url('/rightcol.png')] bg-cover bg-repeat-y ${
                         isanimatingright ? "spin-right" : ""
                     }`}
                 >
-                    <ul>
-                        {/* <li className="py-2 border-b ">9</li>
-                        <li className="py-2 border-b ">1</li>
+                    {/* <ul>
                         <li className="py-2 border-b ">7</li>
                         <li className="py-2 border-b ">8</li>
-                        <li className="py-2 border-b ">6</li> */}
-                    </ul>
+                        <li className="py-2 border-b ">6</li>
+                        <li className="py-2 border-b ">9</li>
+                        <li className="py-2 border-b ">1</li>
+                    </ul> */}
                 </div>
             </div>
             <span

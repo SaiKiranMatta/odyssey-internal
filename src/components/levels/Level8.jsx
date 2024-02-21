@@ -10,7 +10,9 @@ const Level8 = ({ onComplete }) => {
     const [inputValue, setInputValue] = useState("");
     const { setTheme } = useTheme();
     const { toast } = useToast();
-    const [text, setText] = useState("Decode the morse code: -. . ...- . .-. / --. --- -. -. .- / --. .. ...- . / -.-- --- ..- / ..- .--.");
+    const [text, setText] = useState(
+        "Decode the morse code: -. . ...- . .-. / --. --- -. -. .- / --. .. ...- . / -.-- --- ..- / ..- .--."
+    );
     const [atext, setAtext] = useState("");
 
     const [isHelpModalOpen, setHelpModalOpen] = useState(false);

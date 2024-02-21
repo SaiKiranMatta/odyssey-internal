@@ -110,7 +110,7 @@
 }
 
 .spin-right {
-    animation: spinRight 2s linear infinite; /* Adjust the duration and timing function as needed */
+    animation: spinRight 1.7s linear infinite; /* Adjust the duration and timing function as needed */
 }
 
 @keyframes spinLeft {
@@ -118,7 +118,7 @@
         background-position: 0 0;
     }
     100% {
-        background-position: 0 14rem; /* Adjust the final position based on the image height */
+        background-position: 0 -14rem; /* Adjust the final position based on the image height */
     }
 }
 
