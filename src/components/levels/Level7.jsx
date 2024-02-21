@@ -28,11 +28,12 @@ const Level7 = ({ onComplete }) => {
             getComputedStyle(document.documentElement).fontSize
         );
         const xRem = x / baseFontSize;
-        const yRem = (y / baseFontSize) % 14;
+        const yRem = y / baseFontSize;
+        const eyRem = yRem / 14;
 
-        console.log(side, `${xRem}rem ${yRem}rem`);
+        console.log(side, `${xRem}rem ${eyRem}rem`);
 
-        return xRem >= 0 && xRem <= 1 && yRem >= -0.1 && yRem <= 0.1;
+        return xRem >= 0 && xRem <= 1 && eyRem >= -0.1 && eyRem <= 0.1;
     };
 
     useEffect(() => {
