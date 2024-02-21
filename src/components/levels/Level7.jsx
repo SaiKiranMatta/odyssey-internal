@@ -12,7 +12,7 @@ const Level7 = ({ onComplete }) => {
     const { setTheme } = useTheme();
     const { toast } = useToast();
     const [text, setText] = useState("Solve the equations");
-    const [atext, setAtext] = useState("");
+    const [atext, setAtext] = useState("_");
     const [isanimatingleft, setisanimatingleft] = useState(true);
     const [isanimatingright, setisanimatingright] = useState(true);
     const leftRef = useRef();
@@ -28,11 +28,11 @@ const Level7 = ({ onComplete }) => {
             getComputedStyle(document.documentElement).fontSize
         );
         const xRem = x / baseFontSize;
-        const yRem = y / baseFontSize;
+        const yRem = (y / baseFontSize) % 14;
 
         console.log(side, `${xRem}rem ${yRem}rem`);
 
-        return xRem >= 0 && xRem <= 1 && yRem >= -1.3 && yRem <= 1.3;
+        return xRem >= 0 && xRem <= 1 && yRem >= -0.1 && yRem <= 0.1;
     };
 
     useEffect(() => {
@@ -170,7 +170,7 @@ const Level7 = ({ onComplete }) => {
                             - 1 =
                         </li>
                         <li className="py-2 border-b border-[#e5e7eb]">
-                            * _ =
+                            * {atext} =
                         </li>
                     </ul>
                 </div>
