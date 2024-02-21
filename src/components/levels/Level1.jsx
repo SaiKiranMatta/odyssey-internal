@@ -19,6 +19,12 @@ const Level1 = ({ onComplete }) => {
         setInputValue(e.target.value);
     };
 
+    const handleEnter = (e) => {
+        if (e.key === "Enter") {
+            handleCommandSubmit();
+        }
+    };
+
     const handleCommandSubmit = () => {
         const match = inputValue.match(/^\/rotate (\d+)$/);
         const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
@@ -56,7 +62,7 @@ const Level1 = ({ onComplete }) => {
                     type="text"
                     value={inputValue}
                     onChange={handleInputChange}
-                    onSubmit={handleCommandSubmit}
+                    onKeyPress={handleEnter}
                     placeholder="Enter command..."
                 />
                 <button onSubmit={handleCommandSubmit}>
