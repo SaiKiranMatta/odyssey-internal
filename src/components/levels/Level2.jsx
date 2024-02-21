@@ -30,6 +30,11 @@ const Level2 = ({ onComplete }) => {
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
+    const handleEnter = (e) => {
+        if (e.key === "Enter") {
+            handleCommandSubmit();
+        }
+    };
 
     const handleCommandSubmit = () => {
         const match = inputValue.match(/^\/rotate (\d+)$/);
@@ -64,10 +69,11 @@ const Level2 = ({ onComplete }) => {
             />
             <div className="flex gap-1">
                 <Input
-                    type="text"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    placeholder="Enter command..."
+                     type="text"
+                     value={inputValue}
+                     onChange={handleInputChange}
+                     onKeyPress={handleEnter}
+                     placeholder="Enter command..."
                 />
                 <button onClick={handleCommandSubmit}>
                     <Image

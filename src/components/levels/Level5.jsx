@@ -70,7 +70,11 @@ const Level5 = ({ onComplete }) => {
     const closeHelpModal = () => {
         setHelpModalOpen(false);
     };
-
+    const handleEnter = (e) => {
+        if (e.key === "Enter") {
+            handleCommandSubmit();
+        }
+    };
     return (
         <div className="flex flex-col items-center mt-4 ">
             <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
@@ -98,6 +102,7 @@ const Level5 = ({ onComplete }) => {
                     type="text"
                     value={inputValue}
                     onChange={handleInputChange}
+                    onKeyPress={handleEnter}
                     placeholder="Enter command..."
                 />
                 <button onClick={handleCommandSubmit}>
