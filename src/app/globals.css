@@ -70,6 +70,7 @@
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-background text-foreground;
     }
@@ -84,8 +85,10 @@
 .slotMachine {
     display: flex;
     justify-content: space-between;
-    width: 64px; /* Adjust the width as needed */
-    height: 224px; /* Adjust the height as needed */
+    width: 64px;
+    /* Adjust the width as needed */
+    height: 224px;
+    /* Adjust the height as needed */
 }
 
 .column {
@@ -106,19 +109,23 @@
 }
 
 .spin-left {
-    animation: spinLeft 2s linear infinite; /* Adjust the duration and timing function as needed */
+    animation: spinLeft 2s linear infinite;
+    /* Adjust the duration and timing function as needed */
 }
 
 .spin-right {
-    animation: spinRight 1.9s linear infinite; /* Adjust the duration and timing function as needed */
+    animation: spinRight 1.9s linear infinite;
+    /* Adjust the duration and timing function as needed */
 }
 
 @keyframes spinLeft {
     0% {
         background-position: 0 0;
     }
+
     100% {
-        background-position: 0 -14rem; /* Adjust the final position based on the image height */
+        background-position: 0 -14rem;
+        /* Adjust the final position based on the image height */
     }
 }
 
@@ -126,7 +133,9 @@
     0% {
         background-position: 0 0;
     }
+
     100% {
-        background-position: 0 14rem; /* Adjust the final position based on the image height */
+        background-position: 0 14rem;
+        /* Adjust the final position based on the image height */
     }
 }
