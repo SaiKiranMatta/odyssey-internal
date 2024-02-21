@@ -11,9 +11,7 @@ const Level6 = ({ onComplete }) => {
     const [inputValue, setInputValue] = useState("");
     const { setTheme } = useTheme();
     const { toast } = useToast();
-    const [text, setText] = useState(
-        "find what this signifies?."
-    );
+    const [text, setText] = useState("find what this signifies?.");
     const [atext, setAtext] = useState("");
 
     const [isHelpModalOpen, setHelpModalOpen] = useState(false);
@@ -80,8 +78,8 @@ const Level6 = ({ onComplete }) => {
             <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
                 Level 6
             </h1>
-            <p className="mx-10 mt-8 text-xl font-semibold ">{text}</p>
-            <div className=" w-[80%] ">
+            <p className="mx-10 my-8 text-xl font-semibold ">{text}</p>
+            <div className=" w-[80%] flex justify-center">
                 <Image
                     src="/odyssey1.png"
                     alt="69"
@@ -91,7 +89,7 @@ const Level6 = ({ onComplete }) => {
                 />
             </div>
             <span
-                className="mx-10 mt-4 mb-8 cursor-pointer "
+                className="mx-10 mt-8 mb-8 cursor-pointer "
                 onClick={() => setHelpModalOpen(true)}
             >
                 Type /help to get commands and hints
