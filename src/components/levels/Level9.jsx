@@ -9,7 +9,7 @@ const Level9 = ({ onComplete }) => {
   const [inputValue, setInputValue] = useState("");
   const [image, setImage] = useState("/Police.png");
   const [initialRender, setInitialRender] = useState(true);
-  
+
   const [transformX, setTransformX] = useState(0); // State for X translation
   // Set the theme to a specific color when the component mounts
   useEffect(() => {
@@ -40,16 +40,15 @@ const Level9 = ({ onComplete }) => {
       const theme = matchTheme[1];
       setTheme(theme);
       setInputValue("");
+    } else if (movex) {
+      // Handle movex command
+      const newX = parseInt(movex[1], 10);
+      if (!isNaN(newX)) {
+        setTransformX((prevX) => prevX + newX); // Increment X position by newX value
+        setInputValue("");
+      }
     }
-    else if (movex) {
-    // Handle movex command
-    const newX = parseInt(movex[1], 10);
-    if (!isNaN(newX)) {
-      setTransformX((prevX) => prevX + newX); // Increment X position by newX value
-      setInputValue("");
-    }
-  }
-};
+  };
 
   return (
     <div className="flex flex-col items-center mt-4 ">
@@ -60,9 +59,9 @@ const Level9 = ({ onComplete }) => {
       <Image
         className="my-5 "
         src={image}
-        alt="bird"
-        width={200}
-        height={300}
+        alt="police"
+        width={40}
+        height={60}
         style={{ transform: `rotate(${rotationAngle}deg)` }}
       />
       <div className="flex gap-1">

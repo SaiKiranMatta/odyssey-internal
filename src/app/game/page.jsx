@@ -14,7 +14,7 @@ import Level13 from "@/components/levels/Level13";
 import React, { useEffect, useState } from "react";
 
 const Game = () => {
-  const [currentLevel, setCurrentLevel] = useState(13);
+  const [currentLevel, setCurrentLevel] = useState(9);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
