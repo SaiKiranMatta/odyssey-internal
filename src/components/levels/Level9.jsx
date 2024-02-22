@@ -51,13 +51,15 @@ const Level9 = ({ onComplete }) => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-4 ">
+    <div className="flex flex-col items-center mt-4">
       <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
         Level 9
       </h1>
       <p className=" mt-8 text-xl font-semibold mb-[-1rem]"></p>
-      <div className="flex justify-start w-[80%] relative">
-        <div className="flex justify-start gap-6 move-this-entire-div ">
+      <div className="relative flex justify-start md:w-96 w-80">
+        <div
+          className={`flex justify-start gap-6 move-this-entire-div`}
+          style={{ transform: `translateX(${transformX}px)` }}>
           <Image
             className="my-5 "
             src={image}
@@ -68,7 +70,7 @@ const Level9 = ({ onComplete }) => {
           />
           <Image
             className="my-5 "
-            src={image}
+            src="/thief.png"
             alt="thief"
             width={40}
             height={60}
@@ -76,8 +78,8 @@ const Level9 = ({ onComplete }) => {
           />
         </div>
         <Image
-          className="absolute my-5 right-6 "
-          src={image}
+          className="absolute my-5 right-2 "
+          src="/jail.png"
           alt="jail"
           width={40}
           height={60}
