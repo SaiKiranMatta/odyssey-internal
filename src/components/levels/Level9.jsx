@@ -1,5 +1,5 @@
 import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Input } from "../ui/input";
 import Image from "next/image";
 
@@ -9,6 +9,7 @@ const Level9 = ({ onComplete }) => {
   const [inputValue, setInputValue] = useState("");
   const [image, setImage] = useState("/Police.png");
   const [initialRender, setInitialRender] = useState(true);
+  const parentDivRef = useRef(null);
 
   const [transformX, setTransformX] = useState(0); // State for X translation
   // Set the theme to a specific color when the component mounts
@@ -16,6 +17,26 @@ const Level9 = ({ onComplete }) => {
     setTheme("dark");
     setInitialRender(false);
   }, []);
+
+  useEffect(() => {
+    if (parentDivRef.current) {
+      const parentDivWidth = parentDivRef.current.clientWidth;
+    }
+  }, [parentDivRef]);
+
+  useEffect(() => {
+    // Check if the image of the thief reaches the position of the jail
+    const thiefPosition = transformX;
+    const jailPosition = parentDivRef.current.clientWidth - 112; // Adjust 40 based on the width of the thief image
+
+    if (!initialRender && theme === "light" && thiefPosition >= jailPosition) {
+      console.log("yes");
+
+      setTimeout(() => {
+        onComplete(10);
+      }, 2000);
+    }
+  }, [theme, initialRender, transformX, onComplete]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -29,7 +50,7 @@ const Level9 = ({ onComplete }) => {
   const handleCommandSubmit = () => {
     const match = inputValue.match(/^\/rotate (\d+)$/);
     const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
-    const movex = inputValue.match(/^\/movex (-?\d+)$/);
+    const movex = inputValue.match(/^\/move (-?\d+)$/);
     if (match) {
       const angle = parseInt(match[1], 10);
       if (!isNaN(angle)) {
@@ -44,7 +65,21 @@ const Level9 = ({ onComplete }) => {
       // Handle movex command
       const newX = parseInt(movex[1], 10);
       if (!isNaN(newX)) {
-        setTransformX((prevX) => prevX + newX); // Increment X position by newX value
+        const newTransformX = transformX + newX;
+
+        // Check if the new position exceeds the maximum allowed movement
+        if (
+          newTransformX > parentDivRef.current.clientWidth - 104 ||
+          newTransformX < 0
+        ) {
+          // If it exceeds, reset the position to starting position (0)
+          setTransformX(0);
+          console.log(parentDivRef.current.clientWidth);
+        } else {
+          // Otherwise, update the position
+          setTransformX(newTransformX);
+        }
+
         setInputValue("");
       }
     }
@@ -56,7 +91,9 @@ const Level9 = ({ onComplete }) => {
         Level 9
       </h1>
       <p className=" mt-8 text-xl font-semibold mb-[-1rem]"></p>
-      <div className="relative flex justify-start md:w-96 w-80">
+      <div
+        className="relative flex justify-start md:w-96 w-80"
+        ref={parentDivRef}>
         <div
           className={`flex justify-start gap-6 move-this-entire-div`}
           style={{ transform: `translateX(${transformX}px)` }}>
