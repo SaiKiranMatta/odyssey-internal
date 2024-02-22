@@ -56,14 +56,35 @@ const Level9 = ({ onComplete }) => {
         Level 9
       </h1>
       <p className=" mt-8 text-xl font-semibold mb-[-1rem]"></p>
-      <Image
-        className="my-5 "
-        src={image}
-        alt="police"
-        width={40}
-        height={60}
-        style={{ transform: `rotate(${rotationAngle}deg)` }}
-      />
+      <div className="flex justify-start w-[80%] relative">
+        <div className="flex justify-start gap-6 move-this-entire-div ">
+          <Image
+            className="my-5 "
+            src={image}
+            alt="police"
+            width={40}
+            height={60}
+            style={{ transform: `rotate(${rotationAngle}deg)` }}
+          />
+          <Image
+            className="my-5 "
+            src={image}
+            alt="thief"
+            width={40}
+            height={60}
+            style={{ transform: `rotate(${rotationAngle}deg)` }}
+          />
+        </div>
+        <Image
+          className="absolute my-5 right-6 "
+          src={image}
+          alt="jail"
+          width={40}
+          height={60}
+          style={{ transform: `rotate(${rotationAngle}deg)` }}
+        />
+      </div>
+
       <div className="flex gap-1">
         <Input
           type="text"
