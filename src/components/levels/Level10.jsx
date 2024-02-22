@@ -257,11 +257,19 @@ const Level10 = ({ onComplete }) => {
 
       {isHelpModalOpen && (
         <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
-          <div className="p-4 bg-white rounded-md">
+          <div className="p-4 mx-10 bg-white rounded-md">
             <h2 className="flex flex-col mb-2 text-xl font-bold">
               Available Commands:
             </h2>
             <ul>
+              <li>/multiply [row|col][1-3] [number]</li>
+              <li>
+                /add [row|col] [multiplication factor]*[row/col number]
+                [multiplication factor]*[row/col number]
+              </li>
+              <li>
+                Ex /add row 2*1 3*2 (adds 2 times of row1 to 3 times of row 2)
+              </li>
               <li>/help</li>
               <li>/theme [dark|light]</li>
             </ul>
