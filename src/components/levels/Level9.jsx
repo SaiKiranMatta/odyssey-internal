@@ -9,10 +9,8 @@ const Level9 = ({ onComplete }) => {
   const [inputValue, setInputValue] = useState("");
   const [image, setImage] = useState("/Police.png");
   const [initialRender, setInitialRender] = useState(true);
-  const movex = inputValue.match(/^\/movex (-?\d+)$/);
-  const movey = inputValue.match(/^\/movey (-?\d+)$/);
+  
   const [transformX, setTransformX] = useState(0); // State for X translation
-  const [transformY, setTransformY] = useState(0); // State for Y translation
   // Set the theme to a specific color when the component mounts
   useEffect(() => {
     setTheme("dark");
@@ -31,7 +29,7 @@ const Level9 = ({ onComplete }) => {
   const handleCommandSubmit = () => {
     const match = inputValue.match(/^\/rotate (\d+)$/);
     const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
-
+    const movex = inputValue.match(/^\/movex (-?\d+)$/);
     if (match) {
       const angle = parseInt(match[1], 10);
       if (!isNaN(angle)) {
@@ -48,13 +46,6 @@ const Level9 = ({ onComplete }) => {
     const newX = parseInt(movex[1], 10);
     if (!isNaN(newX)) {
       setTransformX((prevX) => prevX + newX); // Increment X position by newX value
-      setInputValue("");
-    }
-  } else if (movey) {
-    // Handle movey command
-    const newY = parseInt(movey[1], 10);
-    if (!isNaN(newY)) {
-      setTransformY((prevY) => prevY + newY); // Increment Y position by newY value
       setInputValue("");
     }
   }
