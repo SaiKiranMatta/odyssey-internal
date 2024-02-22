@@ -11,20 +11,13 @@ const Level9 = ({ onComplete }) => {
   const [initialRender, setInitialRender] = useState(true);
   const movex = inputValue.match(/^\/movex (-?\d+)$/);
   const movey = inputValue.match(/^\/movey (-?\d+)$/);
-
+  const [transformX, setTransformX] = useState(0); // State for X translation
+  const [transformY, setTransformY] = useState(0); // State for Y translation
   // Set the theme to a specific color when the component mounts
   useEffect(() => {
     setTheme("dark");
     setInitialRender(false);
   }, []);
-
-  useEffect(() => {
-    if (!initialRender && theme === "light") {
-      setTimeout(() => {
-        onComplete(3);
-      }, 2000);
-    }
-  }, [theme, initialRender, onComplete]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
