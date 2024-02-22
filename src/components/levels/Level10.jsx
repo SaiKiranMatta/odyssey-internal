@@ -44,7 +44,7 @@ const Level10 = ({ onComplete }) => {
     if (isLevelComplete()) {
       setText("Success!");
       setTimeout(() => {
-        onComplete(4);
+        onComplete(11);
       }, 2000);
     }
   }, [
@@ -77,7 +77,7 @@ const Level10 = ({ onComplete }) => {
           setHelpModalOpen(true);
           break;
         case "multiply":
-          const multiplyMatch = parameters.match(/^(row|col)([1-3])\s+(\d+)$/);
+          const multiplyMatch = parameters.match(/^(row|col)([1-3])\s+(\S+)$/);
           if (multiplyMatch) {
             const [, type, number, factor] = multiplyMatch;
             const updatedMatrix = [
@@ -95,12 +95,12 @@ const Level10 = ({ onComplete }) => {
               const startIndex = (number - 1) * 3;
               const endIndex = startIndex + 3;
               for (let i = startIndex; i < endIndex; i++) {
-                updatedMatrix[i] *= parseInt(factor);
+                updatedMatrix[i] *= parseFloat(factor);
               }
             } else if (type === "col") {
               const colNumber = parseInt(number);
               for (let i = colNumber - 1; i < 9; i += 3) {
-                updatedMatrix[i] *= parseInt(factor);
+                updatedMatrix[i] *= parseFloat(factor);
               }
             }
             setDigit1(updatedMatrix[0]);
@@ -117,7 +117,8 @@ const Level10 = ({ onComplete }) => {
           break;
         case "add":
           const addMatch = parameters.match(
-            /^(row|col)\s+(\d+)\*(\d+)\s+(\d+)\*(\d+)$/
+            // /^(row|col)\s+(\d+)\*(\d+)\s+(\d+)\*(\d+)$/
+            /^(row|col)\s+(\S+)\*(\d+)\s+to\s+(\S+)\*(\d+)$/
           );
           if (addMatch) {
             const [, type, factor1, source1, factor2, source2] = addMatch;
@@ -137,9 +138,12 @@ const Level10 = ({ onComplete }) => {
               const source2Index = (source2 - 1) * 3;
               const temp = [0, 0, 0];
               for (let i = 0; i < 3; i++) {
-                temp[i] += parseInt(factor1) * updatedMatrix[source1Index + i];
-                temp[i] += parseInt(factor2) * updatedMatrix[source2Index + i];
+                temp[i] +=
+                  parseFloat(factor1) * updatedMatrix[source1Index + i];
+                temp[i] +=
+                  parseFloat(factor2) * updatedMatrix[source2Index + i];
               }
+              console.log(temp);
               for (let i = 0; i < 3; i++) {
                 updatedMatrix[i + source2Index] = temp[i];
               }
@@ -149,8 +153,10 @@ const Level10 = ({ onComplete }) => {
               const source2Index = source2 - 1;
               const temp = [0, 0, 0, 0, 0, 0, 0, 0, 0];
               for (let i = 0; i < 9; i += 3) {
-                temp[i] += parseInt(factor1) * updatedMatrix[i + source1Index];
-                temp[i] += parseInt(factor2) * updatedMatrix[i + source2Index];
+                temp[i] +=
+                  parseFloat(factor1) * updatedMatrix[i + source1Index];
+                temp[i] +=
+                  parseFloat(factor2) * updatedMatrix[i + source2Index];
               }
               for (let i = 0; i < 9; i += 3) {
                 updatedMatrix[i + source2Index] = temp[i];
