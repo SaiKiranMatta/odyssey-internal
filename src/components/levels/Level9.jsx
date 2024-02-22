@@ -7,9 +7,10 @@ const Level9 = ({ onComplete }) => {
   const { theme, setTheme } = useTheme();
   const [rotationAngle, setRotationAngle] = useState(0);
   const [inputValue, setInputValue] = useState("");
-  const [image, setImage] = useState("/birdincage.png");
+  const [image, setImage] = useState("/Police.png");
   const [initialRender, setInitialRender] = useState(true);
-  const [text, setText] = useState("Release the bird");
+  const movex = inputValue.match(/^\/movex (-?\d+)$/);
+  const movey = inputValue.match(/^\/movey (-?\d+)$/);
 
   // Set the theme to a specific color when the component mounts
   useEffect(() => {
@@ -19,8 +20,6 @@ const Level9 = ({ onComplete }) => {
 
   useEffect(() => {
     if (!initialRender && theme === "light") {
-      setImage("/bird.png");
-      setText("Bird is free!");
       setTimeout(() => {
         onComplete(3);
       }, 2000);
@@ -51,14 +50,29 @@ const Level9 = ({ onComplete }) => {
       setTheme(theme);
       setInputValue("");
     }
-  };
+    else if (movex) {
+    // Handle movex command
+    const newX = parseInt(movex[1], 10);
+    if (!isNaN(newX)) {
+      setTransformX((prevX) => prevX + newX); // Increment X position by newX value
+      setInputValue("");
+    }
+  } else if (movey) {
+    // Handle movey command
+    const newY = parseInt(movey[1], 10);
+    if (!isNaN(newY)) {
+      setTransformY((prevY) => prevY + newY); // Increment Y position by newY value
+      setInputValue("");
+    }
+  }
+};
 
   return (
     <div className="flex flex-col items-center mt-4 ">
       <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
         Level 9
       </h1>
-      <p className=" mt-8 text-xl font-semibold mb-[-1rem]">{text}</p>
+      <p className=" mt-8 text-xl font-semibold mb-[-1rem]"></p>
       <Image
         className="my-5 "
         src={image}

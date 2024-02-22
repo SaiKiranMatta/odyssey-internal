@@ -9,10 +9,11 @@ import Level5 from "@/components/levels/Level5";
 import Level6 from "@/components/levels/Level6";
 import Level7 from "@/components/levels/Level7";
 import Level8 from "@/components/levels/Level8";
+import Level9 from "@/components/levels/Level9";
 import React, { useEffect, useState } from "react";
 
 const Game = () => {
-  const [currentLevel, setCurrentLevel] = useState(10);
+  const [currentLevel, setCurrentLevel] = useState(9);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
@@ -30,6 +31,7 @@ const Game = () => {
       {currentLevel === 6 && <Level6 onComplete={handleLevelComplete} />}
       {currentLevel === 7 && <Level7 onComplete={handleLevelComplete} />}
       {currentLevel === 8 && <Level8 onComplete={handleLevelComplete} />}
+      {currentLevel === 9 && <Level9 onComplete={handleLevelComplete} />}
       {currentLevel === 10 && <Level10 onComplete={handleLevelComplete} />}
     </div>
   );
