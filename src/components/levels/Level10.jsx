@@ -270,11 +270,12 @@ const Level10 = ({ onComplete }) => {
             <ul>
               <li>/multiply [row|col][1-3] [number]</li>
               <li>
-                /add [row|col] [multiplication factor]*[row/col number]
+                /add [row|col] [multiplication factor]*[row/col number] to
                 [multiplication factor]*[row/col number]
               </li>
               <li>
-                Ex /add row 2*1 3*2 (adds 2 times of row1 to 3 times of row 2)
+                Ex /add row 2*1 to 3*2 (adds 2 times of row1 to 3 times of row
+                2)
               </li>
               <li>/help</li>
               <li>/theme [dark|light]</li>
