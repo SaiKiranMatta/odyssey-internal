@@ -1,6 +1,7 @@
 "use client";
 
 import Level1 from "@/components/levels/Level1";
+import Level10 from "@/components/levels/Level10";
 import Level2 from "@/components/levels/Level2";
 import Level3 from "@/components/levels/Level3";
 import Level4 from "@/components/levels/Level4";
@@ -11,7 +12,7 @@ import Level8 from "@/components/levels/Level8";
 import React, { useEffect, useState } from "react";
 
 const Game = () => {
-  const [currentLevel, setCurrentLevel] = useState(6);
+  const [currentLevel, setCurrentLevel] = useState(10);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
@@ -29,6 +30,7 @@ const Game = () => {
       {currentLevel === 6 && <Level6 onComplete={handleLevelComplete} />}
       {currentLevel === 7 && <Level7 onComplete={handleLevelComplete} />}
       {currentLevel === 8 && <Level8 onComplete={handleLevelComplete} />}
+      {currentLevel === 10 && <Level10 onComplete={handleLevelComplete} />}
     </div>
   );
 };
