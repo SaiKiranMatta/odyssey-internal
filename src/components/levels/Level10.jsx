@@ -263,7 +263,7 @@ const Level10 = ({ onComplete }) => {
 
       {isHelpModalOpen && (
         <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
-          <div className="p-4 mx-10 bg-white rounded-md">
+          <div className="p-4 mx-10 bg-white dark:bg-[#080917] rounded-md">
             <h2 className="flex flex-col mb-2 text-xl font-bold">
               Available Commands:
             </h2>
