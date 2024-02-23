@@ -89,7 +89,6 @@ const Level7 = ({ onComplete }) => {
       switch (command) {
         case "rotate":
           if (!isNaN(text)) {
-            setRotationAngle((prevAngle) => (prevAngle + parseInt(text)) % 360);
             setInputValue("");
           }
         case "text":

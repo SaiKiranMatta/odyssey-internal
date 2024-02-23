@@ -140,6 +140,38 @@
   }
 }
 
+.spin-leftN {
+  animation: spinLeftN 3s linear infinite;
+  /* Adjust the duration and timing function as needed */
+}
+
+.spin-rightN {
+  animation: spinRightN 2.9s linear infinite;
+  /* Adjust the duration and timing function as needed */
+}
+
+@keyframes spinLeftN {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 -15rem;
+    /* Adjust the final position based on the image height */
+  }
+}
+
+@keyframes spinRightN {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 0 15rem;
+    /* Adjust the final position based on the image height */
+  }
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
