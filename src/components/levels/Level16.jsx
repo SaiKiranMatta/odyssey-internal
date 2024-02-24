@@ -197,7 +197,7 @@ const Level16 = ({ onComplete }) => {
           </li>
           <li>
             In my famous speech at Stanford, I told
-            <span className="text-blue-600 ">few</span> lessons
+             <span className="text-blue-600 ">few</span> lessons
           </li>
           <li>
             I lived a <span className="text-pink-500 ">short life</span> but the

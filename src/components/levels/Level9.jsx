@@ -10,6 +10,7 @@ const Level9 = ({ onComplete }) => {
   const [image, setImage] = useState("/Police.png");
   const [initialRender, setInitialRender] = useState(true);
   const parentDivRef = useRef(null);
+  const [text, setText] = useState("Theif has been caught");
 
   const [transformX, setTransformX] = useState(0); // State for X translation
   // Set the theme to a specific color when the component mounts
@@ -31,7 +32,8 @@ const Level9 = ({ onComplete }) => {
 
     if (!initialRender && theme === "light" && thiefPosition >= jailPosition) {
       console.log("yes");
-
+      setImage("/thiefjail.png");
+      setText("Theif has been caught!");
       setTimeout(() => {
         onComplete(10);
       }, 2000);
