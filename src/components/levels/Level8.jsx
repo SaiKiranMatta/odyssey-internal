@@ -68,7 +68,7 @@ const Level8 = ({ onComplete }) => {
       <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
         Level 8
       </h1>
-      <p className="mt-8 text-xl font-semibold ">{text}</p>
+      <p className="mx-10 mt-8 text-xl font-semibold ">{text}</p>
 
       <span
         className="mx-10 mt-4 mb-8 cursor-pointer "

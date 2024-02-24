@@ -35,10 +35,10 @@ const Level16 = ({ onComplete }) => {
     const xRem = x / baseFontSize;
     const yRem = y / baseFontSize;
     console.log(yRem);
-    const eyRem = yRem / 15;
+    const eyRem = yRem;
     console.log(eyRem);
 
-    return xRem >= 0 && xRem <= 1 && eyRem >= -0.1 && eyRem <= 0.1;
+    return (eyRem >= -1.5 && eyRem <= 1.5) || eyRem <= -13.5 || eyRem >= 13.5;
   };
 
   const isAnimationStopped = () => {
@@ -72,10 +72,20 @@ const Level16 = ({ onComplete }) => {
     ) {
       setText("Success!");
       setTimeout(() => {
-        onComplete(8);
+        onComplete(17);
       }, 2000);
     }
-  }, [oneRef, twoRef, threeRef, fourRef, onComplete]);
+  }, [
+    oneRef,
+    twoRef,
+    threeRef,
+    fourRef,
+    isanimatingone,
+    isanimatingtwo,
+    isanimatingthree,
+    isanimatingfour,
+    onComplete,
+  ]);
 
   const stopAnimation = (side) => {
     let currentPos;
@@ -197,7 +207,7 @@ const Level16 = ({ onComplete }) => {
           </li>
           <li>
             In my famous speech at Stanford, I told
-            <span className="text-blue-600 ">few</span> lessons
+            <span className="text-blue-600 "> few</span> lessons
           </li>
           <li>
             I lived a <span className="text-pink-500 ">short life</span> but the

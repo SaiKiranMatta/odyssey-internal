@@ -184,3 +184,11 @@
 .animate-spin {
   animation: spin 3s linear infinite; /* You can adjust the duration and timing function as needed */
 }
+
+.spacer {
+  aspect-ratio: 540/960;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

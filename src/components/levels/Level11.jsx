@@ -97,7 +97,7 @@ const Level11 = ({ onComplete }) => {
   const handleCommandSubmit = () => {
     const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
 
-    const match = inputValue.match(/^\/(text|help|rotate)\s*(.*)$/);
+    const match = inputValue.match(/^\/(text|help)\s*(.*)$/);
 
     if (match) {
       const [, command, text] = match;

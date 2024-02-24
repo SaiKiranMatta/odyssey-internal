@@ -29,11 +29,9 @@ const Level7 = ({ onComplete }) => {
     );
     const xRem = x / baseFontSize;
     const yRem = y / baseFontSize;
-    const eyRem = yRem / 14;
+    const eyRem = yRem;
 
-    console.log(side, `${xRem}rem ${eyRem}rem`);
-
-    return xRem >= 0 && xRem <= 1 && eyRem >= -0.1 && eyRem <= 0.1;
+    return (eyRem >= -1.5 && eyRem <= 1.5) || eyRem <= -12.5 || eyRem >= 12.5;
   };
 
   useEffect(() => {

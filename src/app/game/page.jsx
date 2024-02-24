@@ -18,7 +18,7 @@ import Level15 from "@/components/levels/Level15";
 import Level16 from "@/components/levels/Level16";
 
 const Game = () => {
-  const [currentLevel, setCurrentLevel] = useState(16);
+  const [currentLevel, setCurrentLevel] = useState(1);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
