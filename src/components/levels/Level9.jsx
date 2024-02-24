@@ -10,7 +10,8 @@ const Level9 = ({ onComplete }) => {
   const [image, setImage] = useState("/Police.png");
   const [initialRender, setInitialRender] = useState(true);
   const parentDivRef = useRef(null);
-  const [text, setText] = useState("Theif has been caught");
+  const [text, setText] = useState("Theif has been caught!");
+  const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
   const [transformX, setTransformX] = useState(0); // State for X translation
   // Set the theme to a specific color when the component mounts
@@ -32,11 +33,10 @@ const Level9 = ({ onComplete }) => {
 
     if (!initialRender && theme === "light" && thiefPosition >= jailPosition) {
       console.log("yes");
-      setImage("/thiefjail.png");
       setText("Theif has been caught!");
       setTimeout(() => {
-        onComplete(10);
-      }, 2000);
+        onComplete(40);
+      }, 3000);
     }
   }, [theme, initialRender, transformX, onComplete]);
 
@@ -85,6 +85,12 @@ const Level9 = ({ onComplete }) => {
         setInputValue("");
       }
     }
+    else if (inputValue === "/help") {
+      setHelpModalOpen(true);
+    }
+  };
+  const closeHelpModal = () => {
+    setHelpModalOpen(false);
   };
 
   return (
@@ -125,7 +131,11 @@ const Level9 = ({ onComplete }) => {
           style={{ transform: `rotate(${rotationAngle}deg)` }}
         />
       </div>
-
+      <span
+        className="mx-10 mt-4 mb-8 cursor-pointer "
+        onClick={() => setHelpModalOpen(true)}>
+        Type /help to get commands and hints
+      </span>
       <div className="flex gap-1">
         <Input
           type="text"
@@ -144,6 +154,27 @@ const Level9 = ({ onComplete }) => {
           />
         </button>
       </div>
+      {isHelpModalOpen && (
+        <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
+          <div className="p-4 bg-white rounded-md">
+            <h2 className="flex flex-col mb-2 text-xl font-bold">
+              Available Commands:
+            </h2>
+            <ul>
+              <li>/move [distance]</li>
+              <li>/help</li>
+              <li>/theme [dark|light]</li>
+            </ul>
+            <div className="text-center ">
+              <button
+                className="p-2 mt-4 text-white bg-blue-500 rounded-md "
+                onClick={closeHelpModal}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
