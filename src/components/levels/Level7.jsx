@@ -45,14 +45,16 @@ const Level7 = ({ onComplete }) => {
     if (
       isInRange(leftPosition, "left") &&
       isInRange(rightPosition, "right") &&
-      atext == "2"
+      atext == "2" &&
+      !isanimatingleft &&
+      !isanimatingright
     ) {
       setText("Success!");
       setTimeout(() => {
         onComplete(8);
       }, 2000);
     }
-  }, [atext, leftRef, rightRef, onComplete]);
+  }, [atext, leftRef, rightRef, isanimatingleft, isanimatingright, onComplete]);
 
   const stopAnimation = (side) => {
     let currentPos;
