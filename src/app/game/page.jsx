@@ -19,11 +19,13 @@ import Level16 from "@/components/levels/Level16";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Level14 from "@/components/levels/Level14";
+import { staticData } from "@/lib/staticdata";
 
 const Game = () => {
   const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(true);
   console.log(status);
-  const [currentLevel, setCurrentLevel] = useState(16);
+  const [currentLevel, setCurrentLevel] = useState(12);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
@@ -33,6 +35,7 @@ const Game = () => {
 
   useEffect(() => {
     if (status === "authenticated") {
+      setLoading(false);
       // User is authenticated, continue rendering the component
     } else if (status === "loading") {
       // Session is still loading, do nothing (optional)
@@ -43,24 +46,28 @@ const Game = () => {
   }, [status, redirect]);
 
   return (
-    <div className="w-screen ">
-      {currentLevel === 1 && <Level1 onComplete={handleLevelComplete} />}
-      {currentLevel === 2 && <Level2 onComplete={handleLevelComplete} />}
-      {currentLevel === 3 && <Level3 onComplete={handleLevelComplete} />}
-      {currentLevel === 4 && <Level4 onComplete={handleLevelComplete} />}
-      {currentLevel === 5 && <Level5 onComplete={handleLevelComplete} />}
-      {currentLevel === 6 && <Level6 onComplete={handleLevelComplete} />}
-      {currentLevel === 7 && <Level7 onComplete={handleLevelComplete} />}
-      {currentLevel === 8 && <Level8 onComplete={handleLevelComplete} />}
-      {currentLevel === 9 && <Level9 onComplete={handleLevelComplete} />}
-      {currentLevel === 10 && <Level10 onComplete={handleLevelComplete} />}
-      {currentLevel === 11 && <Level11 onComplete={handleLevelComplete} />}
-      {currentLevel === 12 && <Level12 onComplete={handleLevelComplete} />}
-      {currentLevel === 13 && <Level13 onComplete={handleLevelComplete} />}
-      {currentLevel === 14 && <Level14 onComplete={handleLevelComplete} />}
-      {currentLevel === 15 && <Level15 onComplete={handleLevelComplete} />}
-      {currentLevel === 16 && <Level16 onComplete={handleLevelComplete} />}
-    </div>
+    <>
+      {!loading && currentLevel <= staticData.maxLevel && (
+        <div className="w-screen ">
+          {currentLevel === 1 && <Level1 onComplete={handleLevelComplete} />}
+          {currentLevel === 2 && <Level2 onComplete={handleLevelComplete} />}
+          {currentLevel === 3 && <Level3 onComplete={handleLevelComplete} />}
+          {currentLevel === 4 && <Level4 onComplete={handleLevelComplete} />}
+          {currentLevel === 5 && <Level5 onComplete={handleLevelComplete} />}
+          {currentLevel === 6 && <Level6 onComplete={handleLevelComplete} />}
+          {currentLevel === 7 && <Level7 onComplete={handleLevelComplete} />}
+          {currentLevel === 8 && <Level8 onComplete={handleLevelComplete} />}
+          {currentLevel === 9 && <Level9 onComplete={handleLevelComplete} />}
+          {currentLevel === 10 && <Level10 onComplete={handleLevelComplete} />}
+          {currentLevel === 11 && <Level11 onComplete={handleLevelComplete} />}
+          {currentLevel === 12 && <Level12 onComplete={handleLevelComplete} />}
+          {currentLevel === 13 && <Level13 onComplete={handleLevelComplete} />}
+          {currentLevel === 14 && <Level14 onComplete={handleLevelComplete} />}
+          {currentLevel === 15 && <Level15 onComplete={handleLevelComplete} />}
+          {currentLevel === 16 && <Level16 onComplete={handleLevelComplete} />}
+        </div>
+      )}
+    </>
   );
 };
 
