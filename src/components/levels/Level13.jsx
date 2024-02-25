@@ -11,14 +11,14 @@ const Level13 = ({ onComplete }) => {
   const { setTheme } = useTheme();
   const { toast } = useToast();
   const [text, setText] = useState(
-    "ZKDW GRHV W VWDQG IRU LQ?"
+    "ZKDW LV W LQ JLW?"
   );
   const [atext, setAtext] = useState("");
 
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
   useEffect(() => {
-    if (atext === "wudfnhu") {
+    if (atext === "tracker") {
       setText("Success!");
       setTimeout(() => {
         onComplete(14);
