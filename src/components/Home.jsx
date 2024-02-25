@@ -2,7 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
+import { levelScore } from "@/lib/utils";
+import { database } from "../../firebase";
 const Home = () => {
+  const { data: session } = useSession();
   const currentLevel = 1;
   return (
     <div className="flex flex-col items-center spacer h-screen  bg-[url('/layered-waves-haikei.svg')]">
