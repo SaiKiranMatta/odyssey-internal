@@ -1,45 +1,43 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { Suspense } from "react/";
+import { useSession } from "next-auth/react";
+import dynamic from "next/dynamic";
+
+const DynamicHome = dynamic(() => import("@/components/Home"), {
+  loading: () => (
+    <div className="flex items-center justify-center gap-4 px-8 py-4 mx-auto my-40 text-6xl layer1 w-min glass h-min">
+      <h2 className="py-4 text-3xl text-center shimmerb text-bblue-200">
+        Loading...
+      </h2>
+    </div>
+  ),
+});
+
+const DynamicLogin = dynamic(() => import("@/components/Login"), {
+  loading: () => (
+    <div className="flex items-center justify-center gap-4 px-8 py-4 mx-auto my-40 text-6xl layer1 w-min glass h-min">
+      <h2 className="py-4 text-3xl text-center shimmerb text-bblue-200">
+        Loading...
+      </h2>
+    </div>
+  ),
+});
 
 export default function Home() {
-  const currentLevel = 1;
+  const { data: session, status } = useSession();
+
   return (
     <main className="flex flex-col items-center spacer h-screen  bg-[url('/layered-waves-haikei.svg')]">
-      <div className="mx-6 mt-8">
-        <Image
-          src="/DarkVertical.png"
-          alt="logo"
-          width={500}
-          height={500}
-        />
-      </div>
-      <Link href="/game">
-        <Button
-          className="mt-8 text-xl"
-          size="lg">
-          Play Level {currentLevel}
-        </Button>
-      </Link>
-      <div className="mt-8 text-white">
-        <span>
-          Number of levels completed{" "}
-          <span className=" text-[#F9DC34]">{currentLevel - 1}</span>
-        </span>
-      </div>
-
-      <div className="mt-8 text-white">
-        <span>
-          Number of levels available{" "}
-          <span className=" text-[#F9DC34]">{currentLevel - 1}</span>
-        </span>
-      </div>
-
-      <div className="mt-8 text-white">
-        <span>
-          Score <span className=" text-[#F9DC34]">{currentLevel - 1}</span>
-        </span>
-      </div>
+      {session ? (
+        <Suspense>
+          <DynamicHome />
+        </Suspense>
+      ) : (
+        <Suspense>
+          <DynamicLogin />
+        </Suspense>
+      )}
     </main>
   );
 }

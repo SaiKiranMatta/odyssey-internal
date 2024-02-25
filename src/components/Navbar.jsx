@@ -1,10 +1,12 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 // import { ModeToggle } from "./ModeToggle";
 
 const Navbar = () => {
   return (
-    <div className="sticky top-0 flex items-center justify-between w-screen h-16 px-3 bg-purple-600 border-t-2 border-purple-600 ">
+    <div className="sticky top-0 flex items-center justify-between h-16 px-3 bg-purple-600 border-t-2 border-purple-600 ">
       <Link href="/">
         <span className="text-2xl font-semibold text-yellow-300 md:text-3xl">
           Odyssey

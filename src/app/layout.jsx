@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
+import { SessionProvider } from "@/components/SessionProvider";
 
 const jetBrains_mono = JetBrains_Mono({
   subsets: ["latin"],
@@ -18,15 +19,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={jetBrains_mono.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange>
-          <Navbar />
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange>
+            <Navbar />
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
