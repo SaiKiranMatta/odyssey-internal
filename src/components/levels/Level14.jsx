@@ -12,11 +12,11 @@ const Level14 = ({ onComplete }) => {
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
   const coordinates = [
-    "41.4718020  -87.3575310",
     "41.9371470  -87.8324850",
     "27.7517330  -15.5971740",
     "41.9636310  -87.6627340",
-    "31.1833410  121.4371940"
+    "31.1833410  121.4371940",
+    "41.4718020  -87.3575310"
   ];
 
   const handleInputChange = (e) => {
