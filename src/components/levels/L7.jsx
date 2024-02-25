@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
 import { useToast } from "@/components/ui/use-toast";
-import Level7 from "./L8";
 
 const Level7 = ({ onComplete }) => {
   const [rotationAngle, setRotationAngle] = useState(0);

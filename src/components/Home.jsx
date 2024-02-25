@@ -71,7 +71,7 @@ const Home = () => {
 
       <div className="mt-8 text-white">
         <span>
-          Score <span className=" text-[#F9DC34]">{userDet?.S}</span>
+          Score <span className=" text-[#F9DC34]">{Math.floor(parseFloat(userDet?.S))}</span>
         </span>
       </div>
     </div>
