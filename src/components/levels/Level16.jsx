@@ -214,7 +214,6 @@ const Level16 = ({ onComplete }) => {
             world knows what I am worth
           </li>
         </ul>
-        {text}
       </div>
       <div className="relative flex justify-between h-[17rem] px-4 py-4 mt-4 text-xl border w-80">
         <div
@@ -295,6 +294,10 @@ const Level16 = ({ onComplete }) => {
             className="p-1 bg-blue-600 rounded-sm "
           />
         </button>
+      </div>
+
+      <div className="mt-8">
+        <p className="font-semibold text-green-600">{text}</p>
       </div>
 
       {isHelpModalOpen && (

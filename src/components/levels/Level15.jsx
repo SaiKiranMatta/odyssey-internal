@@ -19,22 +19,6 @@ const Level15 = ({ onComplete }) => {
 
   const { setTheme } = useTheme();
 
-  useEffect(() => {
-    // Check for completion condition and call onComplete if needed
-    const isCompleted =
-      towers[3].length === 3 &&
-      towers[3][0] === 3 &&
-      towers[3][1] === 2 &&
-      towers[3][2] === 1;
-
-    if (isCompleted) {
-      setText("Success!");
-      setTimeout(() => {
-        onComplete(16);
-      }, 2000);
-    }
-  }, [towers, onComplete]);
-
   const moveDisc = (source, destination) => {
     const sourceTower = towers[source];
     const destinationTower = towers[destination];
@@ -57,6 +41,22 @@ const Level15 = ({ onComplete }) => {
       });
     }
   };
+
+  useEffect(() => {
+    // Check for completion condition and call onComplete if needed
+    const isCompleted =
+      towers[3].length === 3 &&
+      towers[3][0] === 3 &&
+      towers[3][1] === 2 &&
+      towers[3][2] === 1;
+
+    if (isCompleted) {
+      setText("Success!");
+      setTimeout(() => {
+        onComplete(16);
+      }, 2000);
+    }
+  }, [towers, onComplete, moveDisc]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
