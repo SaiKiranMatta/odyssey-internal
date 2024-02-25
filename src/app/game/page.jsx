@@ -18,6 +18,7 @@ import Level15 from "@/components/levels/Level15";
 import Level16 from "@/components/levels/Level16";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import Level14 from "@/components/levels/Level14";
 
 const Game = () => {
   const { data: session, status } = useSession();
@@ -56,6 +57,7 @@ const Game = () => {
       {currentLevel === 11 && <Level11 onComplete={handleLevelComplete} />}
       {currentLevel === 12 && <Level12 onComplete={handleLevelComplete} />}
       {currentLevel === 13 && <Level13 onComplete={handleLevelComplete} />}
+      {currentLevel === 14 && <Level14 onComplete={handleLevelComplete} />}
       {currentLevel === 15 && <Level15 onComplete={handleLevelComplete} />}
       {currentLevel === 16 && <Level16 onComplete={handleLevelComplete} />}
     </div>
