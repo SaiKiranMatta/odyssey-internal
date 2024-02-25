@@ -6,21 +6,22 @@ import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
 import { useToast } from "@/components/ui/use-toast";
 
-const Level6 = ({ onComplete }) => {
-  const [rotationAngle, setRotationAngle] = useState(0);
+const Level4 = ({ onComplete }) => {
   const [inputValue, setInputValue] = useState("");
   const { setTheme } = useTheme();
   const { toast } = useToast();
-  const [text, setText] = useState("Find what this signifies?");
+  const [text, setText] = useState(
+    "Decode the morse code: -. . ...- . .-. / --. --- -. -. .- / --. .. ...- . / -.-- --- ..- / ..- .--."
+  );
   const [atext, setAtext] = useState("");
 
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
   useEffect(() => {
-    if (atext === "opensys") {
+    if (atext === "never gonna give you up") {
       setText("Success!");
       setTimeout(() => {
-        onComplete(7);
+        onComplete(9);
       }, 2000);
     }
   }, [atext, onComplete]);
@@ -32,7 +33,7 @@ const Level6 = ({ onComplete }) => {
   const handleCommandSubmit = () => {
     const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
 
-    const match = inputValue.match(/^\/(text|help|rotate)\s*(.*)$/);
+    const match = inputValue.match(/^\/(text|help)\s*(.*)$/);
     console.log(match);
 
     if (match) {
@@ -40,11 +41,6 @@ const Level6 = ({ onComplete }) => {
       console.log(match);
 
       switch (command) {
-        case "rotate":
-          if (!isNaN(text)) {
-            setRotationAngle((prevAngle) => (prevAngle + parseInt(text)) % 360);
-            setInputValue("");
-          }
         case "text":
           console.log(1);
           setAtext(text.toLowerCase());
@@ -66,37 +62,23 @@ const Level6 = ({ onComplete }) => {
   const closeHelpModal = () => {
     setHelpModalOpen(false);
   };
-  const handleEnter = (e) => {
-    if (e.key === "Enter") {
-      handleCommandSubmit();
-    }
-  };
+
   return (
     <div className="flex flex-col items-center mt-4 ">
       <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
-        Level 6
+        Level 4
       </h1>
-      <p className="mx-10 my-8 text-xl font-semibold ">{text}</p>
-      <div className=" w-[80%] flex justify-center">
-        <Image
-          src="/odyssey1.png"
-          alt="69"
-          width={150}
-          height={150}
-          style={{ transform: `rotate(${rotationAngle}deg)` }}
-        />
-      </div>
+      <p className="mx-10 mt-8 text-xl font-semibold ">{text}</p>
+
       <span
         className="mx-10 mt-8 mb-8 text-center cursor-pointer"
         onClick={() => setHelpModalOpen(true)}>
         Type /help to get commands and hints</span>
-
       <div className="flex gap-1">
         <Input
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          onKeyPress={handleEnter}
           placeholder="Enter command..."
         />
         <button onClick={handleCommandSubmit}>
@@ -139,6 +121,12 @@ const Level6 = ({ onComplete }) => {
       `}</style>
       <h2 className="mb-2 text-xl font-bold">Available Commands:</h2>
       <ul className="divide-y divide-gray-300">
+      <li className="py-2">
+          <span className="font-bold text-purple-600">/start</span> <span className="text-blue-500">[left|right]</span> - <em>Start animation.</em>
+        </li>
+        <li className="py-2">
+          <span className="font-bold text-purple-600">/stop</span> <span className="text-blue-500">[left|right]</span> - <em>Stop animation.</em>
+        </li>
         <li className="py-2">
           <span className="font-bold text-purple-600">/flipdigit</span> <span className="text-blue-500">[position]</span> - <em>Flip the digit at the specified position.</em>
         </li>
@@ -179,4 +167,4 @@ const Level6 = ({ onComplete }) => {
   );
 };
 
-export default Level6;
+export default Level4;

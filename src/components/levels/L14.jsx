@@ -1,48 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
-import { useToast } from "@/components/ui/use-toast";
 
-const Level4 = ({ onComplete }) => {
+const Level14 = ({ onComplete }) => {
+  const { theme, setTheme } = useTheme();
   const [inputValue, setInputValue] = useState("");
-  const { setTheme } = useTheme();
-  const { toast } = useToast();
-  const [text, setText] = useState("38.897957, -77.036560");
-  const [atext, setAtext] = useState("");
-
+  const [successMessage, setSuccessMessage] = useState("");
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
-  useEffect(() => {
-    if (atext === "joe biden") {
-      setText("Success!");
-      setTimeout(() => {
-        onComplete(5);
-      }, 2000);
-    }
-  }, [atext, onComplete]);
+  const coordinates = [
+    "41.9371470  -87.8324850",
+    "27.7517330  -15.5971740",
+    "41.9636310  -87.6627340",
+    "31.1833410  121.4371940",
+    "41.4718020  -87.3575310",
+  ];
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleCommandSubmit = () => {
-    const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
-
-    const match = inputValue.match(/^\/(text|help)\s*(.*)$/);
-    console.log(match);
+    const match = inputValue.match(/^\/(text|help)\s*(.*)$/i);
 
     if (match) {
       const [, command, text] = match;
-      console.log(match);
 
-      switch (command) {
+      switch (command.toLowerCase()) {
         case "text":
-          console.log(1);
-          setAtext(text.toLowerCase());
-
+          if (text.toLowerCase() === "homer") {
+            setSuccessMessage("Success!");
+            setTimeout(() => {
+              onComplete(15);
+            }, 2000);
+          }
           break;
         case "help":
           setHelpModalOpen(true);
@@ -50,9 +44,17 @@ const Level4 = ({ onComplete }) => {
         default:
           break;
       }
-    } else if (matchTheme) {
-      const theme = matchTheme[1];
-      setTheme(theme);
+    } else if (
+      inputValue.toLowerCase() === "homer" ||
+      inputValue.toUpperCase() === "HOMER"
+    ) {
+      setSuccessMessage("Success!");
+      setTimeout(() => {
+        onComplete();
+      }, 2000);
+    } else {
+      // Clear success message and input value
+      setSuccessMessage("");
       setInputValue("");
     }
   };
@@ -60,30 +62,59 @@ const Level4 = ({ onComplete }) => {
   const closeHelpModal = () => {
     setHelpModalOpen(false);
   };
+
+  useEffect(() => {
+    // Clear the success message after showing it
+    if (successMessage) {
+      const timeout = setTimeout(() => {
+        setSuccessMessage("");
+        onComplete(15);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [successMessage]);
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       handleCommandSubmit();
     }
   };
   return (
-    <div className="flex flex-col items-center mt-4 ">
-      <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
-        Level 4
+    <div className="flex flex-col items-center mt-4">
+      <h1 className="px-4 py-2 mb-8 text-xl text-center text-purple-600 bg-yellow-300 rounded-full">
+        Level 14
       </h1>
-      <p className="mt-8 text-xl font-semibold ">{text}</p>
 
+      <div className="mb-4 italic text-center">
+        "The <span className="text-purple-600">odyssey</span> is so much more
+        than a <span className="text-purple-600">story</span>, it's a journey
+        through time."
+      </div>
+      <div className="text-center ">- Nobody</div>
+
+      <br />
+
+      <div className="mb-4">
+        {coordinates.map((coord, index) => (
+          <p
+            key={index}
+            className="font-semibold text-gray-600">
+            {coord}
+          </p>
+        ))}
+      </div>
       <span
         className="mx-10 mt-8 mb-8 text-center cursor-pointer"
         onClick={() => setHelpModalOpen(true)}>
         Type /help to get commands and hints</span>
-
       <div className="flex gap-1">
         <Input
           type="text"
           value={inputValue}
-          onChange={handleInputChange}
           onKeyPress={handleEnter}
+          onChange={handleInputChange}
           placeholder="Enter command..."
+          className="px-2 py-1 border rounded"
         />
         <button onClick={handleCommandSubmit}>
           <Image
@@ -95,8 +126,6 @@ const Level4 = ({ onComplete }) => {
           />
         </button>
       </div>
-
-   
       {isHelpModalOpen && (
   <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
     <div className="p-4 bg-white dark:bg-[#080917] rounded-md overflow-y-scroll max-w-[60vw] max-h-[40vh] scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
@@ -127,13 +156,26 @@ const Level4 = ({ onComplete }) => {
       <h2 className="mb-2 text-xl font-bold">Available Commands:</h2>
       <ul className="divide-y divide-gray-300">
         <li className="py-2">
+          <span className="font-bold text-purple-600">/start</span> <span className="text-blue-500">[left|right]</span> - <em>Start animation.</em>
+        </li>
+        <li className="py-2">
+          <span className="font-bold text-purple-600">/stop</span> <span className="text-blue-500">[left|right]</span> - <em>Stop animation.</em>
+        </li>
+        
+        <li className="py-2">
           <span className="font-bold text-purple-600">/flipdigit</span> <span className="text-blue-500">[position]</span> - <em>Flip the digit at the specified position.</em>
         </li>
         <li className="py-2">
           <span className="font-bold text-purple-600">/shiftleft</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the left by the specified amount.</em>
         </li>
         <li className="py-2">
+          <span className="font-bold text-purple-600">/zoom</span> <span className="text-blue-500">[in|out]</span> - <em>Zoom in/out on a component.</em>
+        </li>
+        <li className="py-2">
           <span className="font-bold text-purple-600">/shiftright</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the right by the specified amount.</em>
+        </li>
+        <li className="py-2">
+          <span className="font-bold text-purple-600">/move</span> <span className="text-blue-500">[amount]</span> - <em>Move the component on the linear plane by a specified amount.</em>
         </li>
         <li className="py-2">
           <span className="font-bold text-purple-600">/invert</span> - <em>Invert the image.</em>
@@ -150,9 +192,13 @@ const Level4 = ({ onComplete }) => {
         <li className="py-2">
           <span className="font-bold text-purple-600">/help</span> - <em>Show available commands and their descriptions.</em>
         </li>
+        <li className="py-2">
+          <span className="font-bold text-purple-600">/multiply</span> <span className="text-blue-500">[row|col][1-3] [number]</span> - <em>Multiply a specified row or column by a number.</em>
+        </li>
+        <li className="py-2">
+          <span className="font-bold text-purple-600">/add</span> <span className="text-blue-500">[row|col] [multiplication factor]*[row/col number] to [multiplication factor]*[row/col number]</span> - <em>Adds the specified multiplication factor of one row or column to another row or column.</em><span className="font-bold text-purple-600"><br/>Example:</span> <code>/add row 2*1 to 3*2</code> (adds 2 times of row 1 to 3 times of row 2).
+        </li>
       </ul>
-      <h2 className="mb-2 text-xl font-bold">Hint:</h2>
-            <p className="font-bold text-purple-600">POTUS</p>
       <div className="text-center">
         <button
           onClick={closeHelpModal}
@@ -164,8 +210,9 @@ const Level4 = ({ onComplete }) => {
     </div>
   </div>
 )}
+      
     </div>
   );
 };
 
-export default Level4;
+export default Level14;

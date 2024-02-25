@@ -1,42 +1,50 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
+import { useToast } from "@/components/ui/use-toast";
 
-const Level14 = ({ onComplete }) => {
-  const { theme, setTheme } = useTheme();
+const Level15 = ({ onComplete }) => {
   const [inputValue, setInputValue] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const { setTheme } = useTheme();
+  const { toast } = useToast();
+  const [text, setText] = useState(
+    "ZKDW LV W LQ JLW?"
+  );
+  const [atext, setAtext] = useState("");
+
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
-  const coordinates = [
-    "41.9371470  -87.8324850",
-    "27.7517330  -15.5971740",
-    "41.9636310  -87.6627340",
-    "31.1833410  121.4371940",
-    "41.4718020  -87.3575310",
-  ];
+  useEffect(() => {
+    if (atext === "tracker") {
+      setText("Success!");
+      setTimeout(() => {
+        onComplete(14);
+      }, 2000);
+    }
+  }, [atext, onComplete]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleCommandSubmit = () => {
-    const match = inputValue.match(/^\/(text|help)\s*(.*)$/i);
+    const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
+
+    const match = inputValue.match(/^\/(text|help)\s*(.*)$/);
+    console.log(match);
 
     if (match) {
       const [, command, text] = match;
+      console.log(match);
 
-      switch (command.toLowerCase()) {
+      switch (command) {
         case "text":
-          if (text.toLowerCase() === "homer") {
-            setSuccessMessage("Success!");
-            setTimeout(() => {
-              onComplete(15);
-            }, 2000);
-          }
+          console.log(1);
+          setAtext(text.toLowerCase());
+
           break;
         case "help":
           setHelpModalOpen(true);
@@ -44,17 +52,9 @@ const Level14 = ({ onComplete }) => {
         default:
           break;
       }
-    } else if (
-      inputValue.toLowerCase() === "homer" ||
-      inputValue.toUpperCase() === "HOMER"
-    ) {
-      setSuccessMessage("Success!");
-      setTimeout(() => {
-        onComplete();
-      }, 2000);
-    } else {
-      // Clear success message and input value
-      setSuccessMessage("");
+    } else if (matchTheme) {
+      const theme = matchTheme[1];
+      setTheme(theme);
       setInputValue("");
     }
   };
@@ -62,47 +62,18 @@ const Level14 = ({ onComplete }) => {
   const closeHelpModal = () => {
     setHelpModalOpen(false);
   };
-
-  useEffect(() => {
-    // Clear the success message after showing it
-    if (successMessage) {
-      const timeout = setTimeout(() => {
-        setSuccessMessage("");
-        onComplete(15);
-      }, 2000);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [successMessage]);
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       handleCommandSubmit();
     }
   };
   return (
-    <div className="flex flex-col items-center mt-4">
-      <h1 className="px-4 py-2 mb-8 text-xl text-center text-purple-600 bg-yellow-300 rounded-full">
-        An Ode to the Author
+    <div className="flex flex-col items-center mt-4 ">
+      <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
+        Level 15
       </h1>
+      <p className="mt-8 text-xl font-semibold ">{text}</p>
 
-      <div className="mb-4 italic text-center">
-        "The <span className="text-purple-600">odyssey</span> is so much more
-        than a <span className="text-purple-600">story</span>, it's a journey
-        through time."
-      </div>
-      <div className="text-center ">- Nobody</div>
-
-      <br />
-
-      <div className="mb-4">
-        {coordinates.map((coord, index) => (
-          <p
-            key={index}
-            className="font-semibold text-gray-600">
-            {coord}
-          </p>
-        ))}
-      </div>
       <span
         className="mx-10 mt-8 mb-8 text-center cursor-pointer"
         onClick={() => setHelpModalOpen(true)}>
@@ -114,7 +85,6 @@ const Level14 = ({ onComplete }) => {
           onKeyPress={handleEnter}
           onChange={handleInputChange}
           placeholder="Enter command..."
-          className="px-2 py-1 border rounded"
         />
         <button onClick={handleCommandSubmit}>
           <Image
@@ -126,6 +96,7 @@ const Level14 = ({ onComplete }) => {
           />
         </button>
       </div>
+
       {isHelpModalOpen && (
   <div className="fixed top-0 left-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50">
     <div className="p-4 bg-white dark:bg-[#080917] rounded-md overflow-y-scroll max-w-[60vw] max-h-[40vh] scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-transparent">
@@ -153,6 +124,9 @@ const Level14 = ({ onComplete }) => {
           }
         }
       `}</style>
+      <h2 className="mb-2 text-xl font-bold">Hint:</h2>
+            <p className="font-bold text-purple-600">Caesar likes <span className="font-bold text-yellow-500">3 </span>salads</p>
+            <br />
       <h2 className="mb-2 text-xl font-bold">Available Commands:</h2>
       <ul className="divide-y divide-gray-300">
         <li className="py-2">
@@ -210,9 +184,8 @@ const Level14 = ({ onComplete }) => {
     </div>
   </div>
 )}
-      
     </div>
   );
 };
 
-export default Level14;
+export default Level15;

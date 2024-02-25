@@ -1,85 +1,76 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
-import Image from "next/image";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
-const Level15 = ({ onComplete }) => {
-  const [towers, setTowers] = useState({
-    1: [3, 2, 1],
-    2: [],
-    3: [],
-  });
-
-  const [text, setText] = useState("Shift the discs from Tower 1 to Tower 3.");
+const Level6 = ({ onComplete }) => {
+  const [rotationAngle, setRotationAngle] = useState(0);
   const [inputValue, setInputValue] = useState("");
+  const { setTheme } = useTheme();
+  const { toast } = useToast();
+  const [text, setText] = useState("");
+  const [atext, setAtext] = useState("");
+  const [backgroundZoom, setBackgroundZoom] = useState(8);
+
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
-  const { setTheme } = useTheme();
-
-  const moveDisc = (source, destination) => {
-    const sourceTower = towers[source];
-    const destinationTower = towers[destination];
-
-    if (sourceTower.length === 0) {
-      toast({
-        description: "Source tower is empty. Try again.",
-      });
-    } else if (
-      destinationTower.length === 0 ||
-      sourceTower[sourceTower.length - 1] <
-        destinationTower[destinationTower.length - 1]
-    ) {
-      destinationTower.push(sourceTower.pop());
-      console.log(towers);
-    } else {
-      toast({
-        description:
-          "Invalid move. Larger disc cannot be placed on a smaller one. Try again.",
-      });
-    }
-  };
-
   useEffect(() => {
-    // Check for completion condition and call onComplete if needed
-    const isCompleted =
-      towers[3].length === 3 &&
-      towers[3][0] === 3 &&
-      towers[3][1] === 2 &&
-      towers[3][2] === 1;
-
-    if (isCompleted) {
+    if (atext === "pi") {
       setText("Success!");
       setTimeout(() => {
-        onComplete(16);
+        onComplete(13);
       }, 2000);
     }
-  }, [towers, onComplete, moveDisc]);
+  }, [atext, onComplete]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleCommandSubmit = () => {
-    const match = inputValue.match(/^\/shifttop (\d) to (\d)$/);
+    const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
+
+    const match = inputValue.match(/^\/(text|help|rotate|zoom)\s*(.*)$/);
 
     if (match) {
-      const [, source, destination] = match.map(Number);
-      moveDisc(source, destination);
-      setInputValue("");
-    } else if (inputValue === "/help") {
-      setHelpModalOpen(true);
-    } else if (inputValue.startsWith("/theme ")) {
-      const theme = inputValue.split(" ")[1];
+      const [, command, value] = match;
+
+      switch (command) {
+        case "rotate":
+          if (!isNaN(value)) {
+            setRotationAngle(
+              (prevAngle) => (prevAngle + parseInt(value)) % 360
+            );
+            setInputValue("");
+          }
+          break;
+        case "text":
+          setAtext(value.toLowerCase());
+          break;
+        case "help":
+          setHelpModalOpen(true);
+          break;
+        case "zoom":
+          handleZoom(value);
+          break;
+        default:
+          break;
+      }
+    } else if (matchTheme) {
+      const theme = matchTheme[1];
       setTheme(theme);
       setInputValue("");
-    } else {
-      toast({
-        description:
-          "Invalid command. Use /help to see available commands. Try again.",
-      });
+    }
+  };
+
+  const handleZoom = (direction) => {
+    if (direction === "in") {
+      setBackgroundZoom((prevZoom) => prevZoom * 1.2);
+    } else if (direction === "out") {
+      setBackgroundZoom((prevZoom) => prevZoom / 1.2);
     }
   };
 
@@ -94,35 +85,18 @@ const Level15 = ({ onComplete }) => {
   };
 
   return (
-    <div className="flex flex-col items-center mt-4">
+    <div
+      className="flex flex-col items-center mt-4 bg-[url(/pi.png)] bg-cover"
+      style={{ backgroundSize: `${100 * backgroundZoom}%` }}>
       <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
-        Level 15
+        Level 6
       </h1>
       <p className="mx-10 my-8 text-xl font-semibold ">{text}</p>
-
-      <div className="flex justify-between mt-4 w-80 md:w-96">
-        {Object.keys(towers).map((tower) => (
-          <div
-            key={tower}
-            className="flex flex-col items-center">
-            <div className="flex flex-col-reverse items-center justify-start h-20">
-              {towers[tower].map((disc) => (
-                <div
-                  key={disc}
-                  className={`bg-blue-500 h-4 ${
-                    disc === 1 ? "w-8" : disc === 2 ? "w-12" : "w-16"
-                  }
-                   rounded-md m-1  text-center`}></div>
-              ))}
-            </div>
-            <p>Tower {tower}</p>
-          </div>
-        ))}
-      </div>
       <span
         className="mx-10 mt-8 mb-8 text-center cursor-pointer"
         onClick={() => setHelpModalOpen(true)}>
         Type /help to get commands and hints</span>
+
       <div className="flex gap-1">
         <Input
           type="text"
@@ -169,11 +143,11 @@ const Level15 = ({ onComplete }) => {
           }
         }
       `}</style>
+      <h2 className="mb-2 text-xl font-bold">Hint:</h2>
+            <p className="font-bold text-purple-600">Look closely</p>
+            <br />
       <h2 className="mb-2 text-xl font-bold">Available Commands:</h2>
       <ul className="divide-y divide-gray-300">
-      <li className="py-2">
-          <span className="font-bold text-purple-600">/shifttop</span> <span className="text-blue-500">[source] to [destination] </span> - <em>Change positions of components from one pole to another.</em>
-        </li>
         <li className="py-2">
           <span className="font-bold text-purple-600">/start</span> <span className="text-blue-500">[left|right]</span> - <em>Start animation.</em>
         </li>
@@ -233,4 +207,4 @@ const Level15 = ({ onComplete }) => {
   );
 };
 
-export default Level15;
+export default Level6;

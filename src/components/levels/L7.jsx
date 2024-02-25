@@ -5,23 +5,23 @@ import Image from "next/image";
 import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
 import { useToast } from "@/components/ui/use-toast";
+import Level7 from "./L8";
 
-const Level12 = ({ onComplete }) => {
+const Level7 = ({ onComplete }) => {
   const [rotationAngle, setRotationAngle] = useState(0);
   const [inputValue, setInputValue] = useState("");
   const { setTheme } = useTheme();
   const { toast } = useToast();
-  const [text, setText] = useState("");
+  const [text, setText] = useState("Find what this signifies?");
   const [atext, setAtext] = useState("");
-  const [backgroundZoom, setBackgroundZoom] = useState(8);
 
   const [isHelpModalOpen, setHelpModalOpen] = useState(false);
 
   useEffect(() => {
-    if (atext === "pi") {
+    if (atext === "opensys") {
       setText("Success!");
       setTimeout(() => {
-        onComplete(13);
+        onComplete(7);
       }, 2000);
     }
   }, [atext, onComplete]);
@@ -33,28 +33,26 @@ const Level12 = ({ onComplete }) => {
   const handleCommandSubmit = () => {
     const matchTheme = inputValue.match(/^\/theme (dark|light)$/);
 
-    const match = inputValue.match(/^\/(text|help|rotate|zoom)\s*(.*)$/);
+    const match = inputValue.match(/^\/(text|help|rotate)\s*(.*)$/);
+    console.log(match);
 
     if (match) {
-      const [, command, value] = match;
+      const [, command, text] = match;
+      console.log(match);
 
       switch (command) {
         case "rotate":
-          if (!isNaN(value)) {
-            setRotationAngle(
-              (prevAngle) => (prevAngle + parseInt(value)) % 360
-            );
+          if (!isNaN(text)) {
+            setRotationAngle((prevAngle) => (prevAngle + parseInt(text)) % 360);
             setInputValue("");
           }
-          break;
         case "text":
-          setAtext(value.toLowerCase());
+          console.log(1);
+          setAtext(text.toLowerCase());
+
           break;
         case "help":
           setHelpModalOpen(true);
-          break;
-        case "zoom":
-          handleZoom(value);
           break;
         default:
           break;
@@ -66,32 +64,29 @@ const Level12 = ({ onComplete }) => {
     }
   };
 
-  const handleZoom = (direction) => {
-    if (direction === "in") {
-      setBackgroundZoom((prevZoom) => prevZoom * 1.2);
-    } else if (direction === "out") {
-      setBackgroundZoom((prevZoom) => prevZoom / 1.2);
-    }
-  };
-
   const closeHelpModal = () => {
     setHelpModalOpen(false);
   };
-
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       handleCommandSubmit();
     }
   };
-
   return (
-    <div
-      className="flex flex-col items-center mt-4 bg-[url(/pi.png)] bg-cover"
-      style={{ backgroundSize: `${100 * backgroundZoom}%` }}>
+    <div className="flex flex-col items-center mt-4 ">
       <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
-        Level 12
+        Level 7
       </h1>
       <p className="mx-10 my-8 text-xl font-semibold ">{text}</p>
+      <div className=" w-[80%] flex justify-center">
+        <Image
+          src="/odyssey1.png"
+          alt="69"
+          width={150}
+          height={150}
+          style={{ transform: `rotate(${rotationAngle}deg)` }}
+        />
+      </div>
       <span
         className="mx-10 mt-8 mb-8 text-center cursor-pointer"
         onClick={() => setHelpModalOpen(true)}>
@@ -143,18 +138,8 @@ const Level12 = ({ onComplete }) => {
           }
         }
       `}</style>
-      <h2 className="mb-2 text-xl font-bold">Hint:</h2>
-            <p className="font-bold text-purple-600">Look closely</p>
-            <br />
       <h2 className="mb-2 text-xl font-bold">Available Commands:</h2>
       <ul className="divide-y divide-gray-300">
-        <li className="py-2">
-          <span className="font-bold text-purple-600">/start</span> <span className="text-blue-500">[left|right]</span> - <em>Start animation.</em>
-        </li>
-        <li className="py-2">
-          <span className="font-bold text-purple-600">/stop</span> <span className="text-blue-500">[left|right]</span> - <em>Stop animation.</em>
-        </li>
-        
         <li className="py-2">
           <span className="font-bold text-purple-600">/flipdigit</span> <span className="text-blue-500">[position]</span> - <em>Flip the digit at the specified position.</em>
         </li>
@@ -162,13 +147,7 @@ const Level12 = ({ onComplete }) => {
           <span className="font-bold text-purple-600">/shiftleft</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the left by the specified amount.</em>
         </li>
         <li className="py-2">
-          <span className="font-bold text-purple-600">/zoom</span> <span className="text-blue-500">[in|out]</span> - <em>Zoom in/out on a component.</em>
-        </li>
-        <li className="py-2">
           <span className="font-bold text-purple-600">/shiftright</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the right by the specified amount.</em>
-        </li>
-        <li className="py-2">
-          <span className="font-bold text-purple-600">/move</span> <span className="text-blue-500">[amount]</span> - <em>Move the component on the linear plane by a specified amount.</em>
         </li>
         <li className="py-2">
           <span className="font-bold text-purple-600">/invert</span> - <em>Invert the image.</em>
@@ -184,12 +163,6 @@ const Level12 = ({ onComplete }) => {
         </li>
         <li className="py-2">
           <span className="font-bold text-purple-600">/help</span> - <em>Show available commands and their descriptions.</em>
-        </li>
-        <li className="py-2">
-          <span className="font-bold text-purple-600">/multiply</span> <span className="text-blue-500">[row|col][1-3] [number]</span> - <em>Multiply a specified row or column by a number.</em>
-        </li>
-        <li className="py-2">
-          <span className="font-bold text-purple-600">/add</span> <span className="text-blue-500">[row|col] [multiplication factor]*[row/col number] to [multiplication factor]*[row/col number]</span> - <em>Adds the specified multiplication factor of one row or column to another row or column.</em><span className="font-bold text-purple-600"><br/>Example:</span> <code>/add row 2*1 to 3*2</code> (adds 2 times of row 1 to 3 times of row 2).
         </li>
       </ul>
       <div className="text-center">
@@ -207,4 +180,4 @@ const Level12 = ({ onComplete }) => {
   );
 };
 
-export default Level12;
+export default Level7;

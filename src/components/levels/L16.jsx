@@ -6,7 +6,7 @@ import { Input } from "../ui/input";
 import { useTheme } from "next-themes";
 import { useToast } from "@/components/ui/use-toast";
 
-const Level10 = ({ onComplete }) => {
+const Level16 = ({ onComplete }) => {
   const [inputValue, setInputValue] = useState("");
   const { setTheme } = useTheme();
   const { toast } = useToast();
@@ -197,7 +197,7 @@ const Level10 = ({ onComplete }) => {
   return (
     <div className="flex flex-col items-center mt-4 ">
       <h1 className="px-4 py-2 text-2xl text-purple-600 bg-yellow-300 rounded-full">
-        Level 10
+        Level 16
       </h1>
       <p className="mx-10 mt-8 font-semibold text ">{text}</p>
       <div className="flex flex-col items-center px-3 py-2 my-5 text-xl border-2 border-gray-900 rounded-sm">
@@ -346,4 +346,4 @@ const Level10 = ({ onComplete }) => {
   );
 };
 
-export default Level10;
+export default Level16;
