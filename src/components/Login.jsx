@@ -40,17 +40,17 @@ function Login() {
           <input
             type="email"
             value={email}
-            className="w-full px-4 py-2 my-1 border rounded-lg shadow-md outline-none form-control bg-void border-bgold-200"
+            className="w-full px-4 py-2 my-1 bg-transparent border rounded-lg shadow-md outline-none form-control border-bgold-200"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="justify-center w-full my-3 ">
           <label className="text-xl text-bblue-200">Password:</label>
-          <div className="flex justify-between w-full py-2 pl-4 pr-2 my-1 border rounded-lg shadow-md form-control bg-void border-bgold-200">
+          <div className="flex justify-between w-full py-2 pl-4 pr-2 my-1 border rounded-lg shadow-md form-control border-bgold-200">
             <input
               type={isPasswordVisible ? "text" : "password"}
               value={password}
-              className="w-full outline-none bg-void"
+              className="w-full bg-transparent outline-none"
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={handleKeyPress}
             />

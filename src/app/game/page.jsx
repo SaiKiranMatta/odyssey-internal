@@ -16,15 +16,30 @@ import Level11 from "@/components/levels/Level11";
 import Level12 from "@/components/levels/Level12";
 import Level15 from "@/components/levels/Level15";
 import Level16 from "@/components/levels/Level16";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Game = () => {
-  const [currentLevel, setCurrentLevel] = useState(9);
+  const { data: session, status } = useSession();
+  console.log(status);
+  const [currentLevel, setCurrentLevel] = useState(14);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
     // Update state to switch to the next level
     setCurrentLevel(curLevel);
   };
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      // User is authenticated, continue rendering the component
+    } else if (status === "loading") {
+      // Session is still loading, do nothing (optional)
+    } else {
+      // User is not authenticated, redirect to homepage
+      redirect("/");
+    }
+  }, [status, redirect]);
 
   return (
     <div className="w-screen ">
