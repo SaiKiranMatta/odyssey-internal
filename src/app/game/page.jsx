@@ -20,12 +20,15 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Level14 from "@/components/levels/Level14";
 import { staticData } from "@/lib/staticdata";
+import { convertDotsToUnderscores } from "@/lib/utils";
+import { database } from "../../../firebase";
+import { off, onValue, ref, runTransaction, set } from "firebase/database";
 
 const Game = () => {
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
   console.log(status);
-  const [currentLevel, setCurrentLevel] = useState(12);
+  const [userDet, setUserDet] = useState(null);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
@@ -45,26 +48,48 @@ const Game = () => {
     }
   }, [status, redirect]);
 
+  useEffect(() => {
+    // Real-time database listener to fetch selectedPS
+    if (session && session.user) {
+      const uId = convertDotsToUnderscores(session.user.email);
+      const userRef = ref(database, `/${uId}`);
+
+      onValue(userRef, (snapshot) => {
+        const userVal = snapshot.val();
+        console.log(userVal);
+        setUserDet(userVal);
+      });
+
+      return () => {
+        off(userRef);
+      };
+    }
+  }, [session]);
+
   return (
     <>
-      {!loading && currentLevel <= staticData.maxLevel && (
+      {!loading && userDet?.CL <= staticData.maxLevel ? (
         <div className="w-screen ">
-          {currentLevel === 1 && <Level1 onComplete={handleLevelComplete} />}
-          {currentLevel === 2 && <Level2 onComplete={handleLevelComplete} />}
-          {currentLevel === 3 && <Level3 onComplete={handleLevelComplete} />}
-          {currentLevel === 4 && <Level4 onComplete={handleLevelComplete} />}
-          {currentLevel === 5 && <Level5 onComplete={handleLevelComplete} />}
-          {currentLevel === 6 && <Level6 onComplete={handleLevelComplete} />}
-          {currentLevel === 7 && <Level7 onComplete={handleLevelComplete} />}
-          {currentLevel === 8 && <Level8 onComplete={handleLevelComplete} />}
-          {currentLevel === 9 && <Level9 onComplete={handleLevelComplete} />}
-          {currentLevel === 10 && <Level10 onComplete={handleLevelComplete} />}
-          {currentLevel === 11 && <Level11 onComplete={handleLevelComplete} />}
-          {currentLevel === 12 && <Level12 onComplete={handleLevelComplete} />}
-          {currentLevel === 13 && <Level13 onComplete={handleLevelComplete} />}
-          {currentLevel === 14 && <Level14 onComplete={handleLevelComplete} />}
-          {currentLevel === 15 && <Level15 onComplete={handleLevelComplete} />}
-          {currentLevel === 16 && <Level16 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 1 && <Level1 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 2 && <Level2 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 3 && <Level3 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 4 && <Level4 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 5 && <Level5 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 6 && <Level6 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 7 && <Level7 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 8 && <Level8 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 9 && <Level9 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 10 && <Level10 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 11 && <Level11 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 12 && <Level12 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 13 && <Level13 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 14 && <Level14 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 15 && <Level15 onComplete={handleLevelComplete} />}
+          {userDet?.CL === 16 && <Level16 onComplete={handleLevelComplete} />}
+        </div>
+      ) : (
+        <div className="mt-8 text-[#F9DC34] text-center">
+          <span>Come back soon for more levels!</span>
         </div>
       )}
     </>

@@ -42,13 +42,19 @@ const Home = () => {
           height={500}
         />
       </div>
-      <Link href="/game">
-        <Button
-          className="mt-8 text-xl"
-          size="lg">
-          Play Level {userDet?.CL}
-        </Button>
-      </Link>
+      {userDet?.CL <= staticData.maxLevel ? (
+        <Link href="/game">
+          <Button
+            className="mt-8 text-xl"
+            size="lg">
+            Play Level {userDet?.CL}
+          </Button>
+        </Link>
+      ) : (
+        <div className="mt-8 text-[#F9DC34]">
+          <span>Come back soon for more levels!</span>
+        </div>
+      )}
       <div className="mt-8 text-white">
         <span>
           Number of levels completed{" "}
