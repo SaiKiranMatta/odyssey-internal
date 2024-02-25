@@ -35,8 +35,8 @@ const Level9 = ({ onComplete }) => {
       console.log("yes");
       setText("Theif has been caught!");
       setTimeout(() => {
-        onComplete(40);
-      }, 3000);
+        onComplete(10);
+      }, 2000);
     }
   }, [theme, initialRender, transformX, onComplete]);
 
