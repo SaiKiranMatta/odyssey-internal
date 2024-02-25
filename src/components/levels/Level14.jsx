@@ -34,7 +34,7 @@ const Level14 = ({ onComplete }) => {
           if (text.toLowerCase() === "homer") {
             setSuccessMessage("Success!");
             setTimeout(() => {
-              onComplete();
+              onComplete(15);
             }, 2000);
           }
           break;

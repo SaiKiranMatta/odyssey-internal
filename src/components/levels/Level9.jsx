@@ -29,7 +29,7 @@ const Level9 = ({ onComplete }) => {
   useEffect(() => {
     // Check if the image of the thief reaches the position of the jail
     const thiefPosition = transformX;
-    const jailPosition = parentDivRef.current.clientWidth - 112; // Adjust 40 based on the width of the thief image
+    const jailPosition = parentDivRef.current.clientWidth - 132; // Adjust 40 based on the width of the thief image
 
     if (!initialRender && theme === "light" && thiefPosition >= jailPosition) {
       console.log("yes");
@@ -126,8 +126,8 @@ const Level9 = ({ onComplete }) => {
           className="absolute my-5 right-2 "
           src="/jail.png"
           alt="jail"
-          width={40}
-          height={60}
+          width={60}
+          height={50}
           style={{ transform: `rotate(${rotationAngle}deg)` }}
         />
       </div>

@@ -23,7 +23,7 @@ import Level14 from "@/components/levels/Level14";
 const Game = () => {
   const { data: session, status } = useSession();
   console.log(status);
-  const [currentLevel, setCurrentLevel] = useState(12);
+  const [currentLevel, setCurrentLevel] = useState(9);
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
