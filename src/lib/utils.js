@@ -75,3 +75,7 @@ export async function levelScore(level, startTime, curscore) {
     staticData.levelWeightage[level];
   return curscore + score;
 }
+
+export function convertDotsToUnderscores(str) {
+  return str.replace(/\./g, "_");
+}
