@@ -69,7 +69,7 @@ function Login() {
         <div className="flex justify-center w-full">
           <button
             type="button"
-            className="px-4 py-2 my-2 text-xl font-bold duration-300 border rounded-lg cursor-pointer text-bblue-200 border-bgold-200 hover:text-bgold-200"
+             className="px-4 py-2 my-2 hover:text-yellow-300 hover:bg-[#9834ec] text-xl font-bold duration-300 border rounded-lg cursor-pointer text-bblue-200 border-bgold-200 hover:text-bgold-200"
             onClick={handleLogin}>
             Login
           </button>
