@@ -52,7 +52,7 @@ function timeFromLaunch(seconds) {
 
 const axios = require("axios");
 
-async function getIndianEpochTimeFromWorldTimeAPI() {
+export async function getIndianEpochTimeFromWorldTimeAPI() {
   const response = await axios.get(
     "https://worldtimeapi.org/api/timezone/Asia/Kolkata"
   );

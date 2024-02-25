@@ -20,33 +20,46 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Level14 from "@/components/levels/Level14";
 import { staticData } from "@/lib/staticdata";
-import { convertDotsToUnderscores } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import {
+  convertDotsToUnderscores,
+  getIndianEpochTimeFromWorldTimeAPI,
+  levelScore,
+} from "@/lib/utils";
 import { database } from "../../../firebase";
 import { off, onValue, ref, runTransaction, set } from "firebase/database";
 
 const Game = () => {
   const { data: session, status } = useSession();
   const [loading, setLoading] = useState(true);
-  console.log(status);
   const [userDet, setUserDet] = useState(null);
+  const router = useRouter();
 
   const handleLevelComplete = (curLevel) => {
     console.log("function called");
     // Update state to switch to the next level
-    setCurrentLevel(curLevel);
+    setScore(session.user.email);
+    router.push("/");
   };
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      setLoading(false);
-      // User is authenticated, continue rendering the component
-    } else if (status === "loading") {
-      // Session is still loading, do nothing (optional)
-    } else {
-      // User is not authenticated, redirect to homepage
-      redirect("/");
+  const setStartTime = async (email) => {
+    if (!loading && userDet?.CL <= staticData.maxLevel && userDet?.CS == 0) {
+      {
+        const uId = convertDotsToUnderscores(email);
+        const curtime = await getIndianEpochTimeFromWorldTimeAPI();
+        const userRef = ref(database, `/${uId}`);
+        await set(userRef, { CL: userDet?.CL, CS: curtime, S: userDet?.S });
+      }
     }
-  }, [status, redirect]);
+  };
+
+  const setScore = async (email) => {
+    setLoading(true);
+    const uId = convertDotsToUnderscores(email);
+    const userRef = ref(database, `/${uId}`);
+    const updatedScore = await levelScore(userDet?.CL, userDet?.CS, userDet?.S);
+    await set(userRef, { CL: userDet?.CL + 1, CS: 0, S: updatedScore });
+  };
 
   useEffect(() => {
     // Real-time database listener to fetch selectedPS
@@ -60,11 +73,26 @@ const Game = () => {
         setUserDet(userVal);
       });
 
+      setStartTime(session.user.email);
+
       return () => {
         off(userRef);
       };
     }
   }, [session]);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setLoading(false);
+
+      // User is authenticated, continue rendering the component
+    } else if (status === "loading") {
+      // Session is still loading, do nothing (optional)
+    } else {
+      // User is not authenticated, redirect to homepage
+      redirect("/");
+    }
+  }, [status, redirect]);
 
   return (
     <>

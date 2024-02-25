@@ -89,10 +89,9 @@ const Level5 = ({ onComplete }) => {
         />
       </div>
       <span
-        className="mx-10 mt-8 mb-8 cursor-pointer text-center"
+        className="mx-10 mt-8 mb-8 text-center cursor-pointer"
         onClick={() => setHelpModalOpen(true)}>
-        Type /help to get commands and hints
-      </span>
+        Type /help to get commands and hints</span>
 
       <div className="flex gap-1">
         <Input
@@ -139,39 +138,39 @@ const Level5 = ({ onComplete }) => {
           }
         }
       `}</style>
-      <h2 className="text-xl font-bold mb-2">Available Commands:</h2>
+      <h2 className="mb-2 text-xl font-bold">Available Commands:</h2>
       <ul className="divide-y divide-gray-300">
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/flipdigit</span> <span className="text-blue-500">[position]</span> - <em>Flip the digit at the specified position.</em>
+          <span className="font-bold text-purple-600">/flipdigit</span> <span className="text-blue-500">[position]</span> - <em>Flip the digit at the specified position.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/shiftleft</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the left by the specified amount.</em>
+          <span className="font-bold text-purple-600">/shiftleft</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the left by the specified amount.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/shiftright</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the right by the specified amount.</em>
+          <span className="font-bold text-purple-600">/shiftright</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the right by the specified amount.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/invert</span> - <em>Invert the image.</em>
+          <span className="font-bold text-purple-600">/invert</span> - <em>Invert the image.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/theme</span> <span className="text-blue-500">[dark|light]</span> - <em>Change the theme to dark or light.</em>
+          <span className="font-bold text-purple-600">/theme</span> <span className="text-blue-500">[dark|light]</span> - <em>Change the theme to dark or light.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/rotate</span> - <em>Rotate the image.</em>
+          <span className="font-bold text-purple-600">/rotate</span> - <em>Rotate the image.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/text</span> - <em>Input text to the function.</em>
+          <span className="font-bold text-purple-600">/text</span> - <em>Input text to the function.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/help</span> - <em>Show available commands and their descriptions.</em>
+          <span className="font-bold text-purple-600">/help</span> - <em>Show available commands and their descriptions.</em>
         </li>
       </ul>
-      <h2 className="text-xl font-bold mb-2">Hint:</h2>
-            <p className="text-purple-600 font-bold">Internet giant's address</p>
+      <h2 className="mb-2 text-xl font-bold">Hint:</h2>
+            <p className="font-bold text-purple-600">Internet giant's address</p>
       <div className="text-center">
         <button
           onClick={closeHelpModal}
-          className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+          className="p-2 mt-4 text-white bg-blue-500 rounded-md"
         >
           Close
         </button>

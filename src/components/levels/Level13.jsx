@@ -75,10 +75,9 @@ const Level13 = ({ onComplete }) => {
       <p className="mt-8 text-xl font-semibold ">{text}</p>
 
       <span
-        className="mx-10 mt-8 mb-8 cursor-pointer text-center"
+        className="mx-10 mt-8 mb-8 text-center cursor-pointer"
         onClick={() => setHelpModalOpen(true)}>
-        Type /help to get commands and hints
-      </span>
+        Type /help to get commands and hints</span>
       <div className="flex gap-1">
         <Input
           type="text"
@@ -125,59 +124,59 @@ const Level13 = ({ onComplete }) => {
           }
         }
       `}</style>
-      <h2 className="text-xl font-bold mb-2">Hint:</h2>
-            <p className="text-purple-600 font-bold">Caesar likes <span className="text-yellow-500 font-bold">3 </span>salads</p>
+      <h2 className="mb-2 text-xl font-bold">Hint:</h2>
+            <p className="font-bold text-purple-600">Caesar likes <span className="font-bold text-yellow-500">3 </span>salads</p>
             <br />
-      <h2 className="text-xl font-bold mb-2">Available Commands:</h2>
+      <h2 className="mb-2 text-xl font-bold">Available Commands:</h2>
       <ul className="divide-y divide-gray-300">
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/start</span> <span className="text-blue-500">[left|right]</span> - <em>Start animation.</em>
+          <span className="font-bold text-purple-600">/start</span> <span className="text-blue-500">[left|right]</span> - <em>Start animation.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/stop</span> <span className="text-blue-500">[left|right]</span> - <em>Stop animation.</em>
+          <span className="font-bold text-purple-600">/stop</span> <span className="text-blue-500">[left|right]</span> - <em>Stop animation.</em>
         </li>
         
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/flipdigit</span> <span className="text-blue-500">[position]</span> - <em>Flip the digit at the specified position.</em>
+          <span className="font-bold text-purple-600">/flipdigit</span> <span className="text-blue-500">[position]</span> - <em>Flip the digit at the specified position.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/shiftleft</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the left by the specified amount.</em>
+          <span className="font-bold text-purple-600">/shiftleft</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the left by the specified amount.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/zoom</span> <span className="text-blue-500">[in|out]</span> - <em>Zoom in/out on a component.</em>
+          <span className="font-bold text-purple-600">/zoom</span> <span className="text-blue-500">[in|out]</span> - <em>Zoom in/out on a component.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/shiftright</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the right by the specified amount.</em>
+          <span className="font-bold text-purple-600">/shiftright</span> <span className="text-blue-500">[amount]</span> - <em>Shift the image to the right by the specified amount.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/move</span> <span className="text-blue-500">[amount]</span> - <em>Move the component on the linear plane by a specified amount.</em>
+          <span className="font-bold text-purple-600">/move</span> <span className="text-blue-500">[amount]</span> - <em>Move the component on the linear plane by a specified amount.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/invert</span> - <em>Invert the image.</em>
+          <span className="font-bold text-purple-600">/invert</span> - <em>Invert the image.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/theme</span> <span className="text-blue-500">[dark|light]</span> - <em>Change the theme to dark or light.</em>
+          <span className="font-bold text-purple-600">/theme</span> <span className="text-blue-500">[dark|light]</span> - <em>Change the theme to dark or light.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/rotate</span> - <em>Rotate the image.</em>
+          <span className="font-bold text-purple-600">/rotate</span> - <em>Rotate the image.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/text</span> - <em>Input text to the function.</em>
+          <span className="font-bold text-purple-600">/text</span> - <em>Input text to the function.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/help</span> - <em>Show available commands and their descriptions.</em>
+          <span className="font-bold text-purple-600">/help</span> - <em>Show available commands and their descriptions.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/multiply</span> <span className="text-blue-500">[row|col][1-3] [number]</span> - <em>Multiply a specified row or column by a number.</em>
+          <span className="font-bold text-purple-600">/multiply</span> <span className="text-blue-500">[row|col][1-3] [number]</span> - <em>Multiply a specified row or column by a number.</em>
         </li>
         <li className="py-2">
-          <span className="text-purple-600 font-bold">/add</span> <span className="text-blue-500">[row|col] [multiplication factor]*[row/col number] to [multiplication factor]*[row/col number]</span> - <em>Adds the specified multiplication factor of one row or column to another row or column.</em><span className="text-purple-600 font-bold"><br/>Example:</span> <code>/add row 2*1 to 3*2</code> (adds 2 times of row 1 to 3 times of row 2).
+          <span className="font-bold text-purple-600">/add</span> <span className="text-blue-500">[row|col] [multiplication factor]*[row/col number] to [multiplication factor]*[row/col number]</span> - <em>Adds the specified multiplication factor of one row or column to another row or column.</em><span className="font-bold text-purple-600"><br/>Example:</span> <code>/add row 2*1 to 3*2</code> (adds 2 times of row 1 to 3 times of row 2).
         </li>
       </ul>
       <div className="text-center">
         <button
           onClick={closeHelpModal}
-          className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+          className="p-2 mt-4 text-white bg-blue-500 rounded-md"
         >
           Close
         </button>
