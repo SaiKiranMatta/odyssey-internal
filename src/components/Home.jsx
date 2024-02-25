@@ -22,6 +22,7 @@ const Home = () => {
 
       onValue(userRef, (snapshot) => {
         const userVal = snapshot.val();
+        console.log(userVal);
         setUserDet(userVal);
       });
 
