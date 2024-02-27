@@ -80,7 +80,7 @@ const Game = () => {
         off(userRef);
       };
     }
-  }, [session.user]);
+  }, [session?.user]);
 
   useEffect(() => {
     if (status === "authenticated") {
