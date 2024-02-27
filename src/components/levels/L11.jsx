@@ -198,9 +198,9 @@ const Level11 = ({ onComplete }) => {
             height={100}
             style={{ transform: `rotate(${rotationAngle}deg)` }}
           />
-          <span>*1.5 = </span>
+          <span>/2 = </span>
           <span>{atext}</span>
-          <span> = /2</span>
+          <span> = 1.5*</span>
           <Image
             ref={rightRef}
             className={`rounded-full bg-none ${

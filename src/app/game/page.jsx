@@ -45,6 +45,7 @@ const Game = () => {
   const setStartTime = async (email) => {
     if (!loading && userDet?.CL <= staticData.maxLevel && userDet?.CS == 0) {
       {
+        console.log("setStartTime called");
         const uId = convertDotsToUnderscores(email);
         const curtime = await getIndianEpochTimeFromWorldTimeAPI();
         const userRef = ref(database, `/${uId}`);
@@ -72,14 +73,14 @@ const Game = () => {
         console.log(userVal);
         setUserDet(userVal);
       });
-
+      console.log("help")
       setStartTime(session.user.email);
 
       return () => {
         off(userRef);
       };
     }
-  }, [session]);
+  }, [session.user]);
 
   useEffect(() => {
     if (status === "authenticated") {
